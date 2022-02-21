@@ -28,9 +28,9 @@ struct ListIngredientView: View {
                         NavigationLink(destination: IngredientView())
                         {
                             VStack(alignment: .leading){
-                                Text(ingredient.nom)
+                                Text(ingredient.nom).bold()
                                 Text("\(ingredient.categorie.rawValue)")
-                                Text("\(ingredient.quantite)")
+                                Text("\(ingredient.quantite) \(ingredient.unite.rawValue) ")
                             }
                         }
                     }
