@@ -10,12 +10,12 @@ import Foundation
 
 class Ingredient {
     
-    private var id : Int
-    private var nom : String
-    private var categorie : CategorieIngredient
-    private var quantite : Int
-    private var unite : Unite
-    private var coutUnitaire : Double
+    var id : Int
+    var nom : String
+    var categorie : CategorieIngredient
+    var quantite : Int
+    var unite : Unite
+    var coutUnitaire : Double
     
     init(id : Int, nom : String, categorie : CategorieIngredient, quantite : Int, unite : Unite, coutUnitaire : Double){
         self.id = id;

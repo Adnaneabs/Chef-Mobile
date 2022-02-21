@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum CategorieIngredient {
-    case Viande
-    case Legumes
+enum CategorieIngredient : String {
+    case Viande = "viande"
+    case Legumes = "légume"
 }

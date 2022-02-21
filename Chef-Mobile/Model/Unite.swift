@@ -7,9 +7,9 @@
 
 import Foundation
 
-enum Unite {
-    case Kg
-    case L
-    case g
-    case mL
+enum Unite : String{
+    case Kg = "Kg"
+    case L = "L"
+    case g = "g"
+    case mL = "ml"
 }
