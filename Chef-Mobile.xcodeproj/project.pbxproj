@@ -12,6 +12,7 @@
 		0CF37C6F27C38F70006FA69C /* Unite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C6E27C38F70006FA69C /* Unite.swift */; };
 		0CF37C7127C3906E006FA69C /* Etape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7027C3906E006FA69C /* Etape.swift */; };
 		0CF37C7327C3910E006FA69C /* FicheTechnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7227C3910E006FA69C /* FicheTechnique.swift */; };
+		0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7527C39241006FA69C /* ListIngredientView.swift */; };
 		D0C2C34C27BACBD10093EDDB /* Chef_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */; };
 		D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34D27BACBD10093EDDB /* ContentView.swift */; };
 		D0C2C35027BACBD20093EDDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C2C34F27BACBD20093EDDB /* Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		0CF37C6E27C38F70006FA69C /* Unite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unite.swift; sourceTree = "<group>"; };
 		0CF37C7027C3906E006FA69C /* Etape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Etape.swift; sourceTree = "<group>"; };
 		0CF37C7227C3910E006FA69C /* FicheTechnique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechnique.swift; sourceTree = "<group>"; };
+		0CF37C7527C39241006FA69C /* ListIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientView.swift; sourceTree = "<group>"; };
 		D0C2C34827BACBD10093EDDB /* Chef-Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chef-Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef_MobileApp.swift; sourceTree = "<group>"; };
 		D0C2C34D27BACBD10093EDDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		0CF37C7427C39203006FA69C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0CF37C7527C39241006FA69C /* ListIngredientView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		D0C2C33F27BACBD10093EDDB = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 		D0C2C34A27BACBD10093EDDB /* Chef-Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				0CF37C7427C39203006FA69C /* View */,
 				0CF37C6727C38E43006FA69C /* Model */,
 				D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */,
 				D0C2C34D27BACBD10093EDDB /* ContentView.swift */,
@@ -283,6 +294,7 @@
 				0CF37C6D27C38F2A006FA69C /* Ingredient.swift in Sources */,
 				0CF37C7327C3910E006FA69C /* FicheTechnique.swift in Sources */,
 				0CF37C7127C3906E006FA69C /* Etape.swift in Sources */,
+				0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */,
 				0CF37C6B27C38E9A006FA69C /* CategorieIngredient.swift in Sources */,
 				D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */,
 				D0C2C34C27BACBD10093EDDB /* Chef_MobileApp.swift in Sources */,
