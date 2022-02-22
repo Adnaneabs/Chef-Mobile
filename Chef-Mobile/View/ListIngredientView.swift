@@ -8,7 +8,81 @@
 import Foundation
 import SwiftUI
 
+struct SheetView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    //Les states var sont provisoires pour tester la vue
+    @State var nomIng: String = ""
+    @State var catIng: CategorieIngredient = CategorieIngredient.Viande
+    @State var quantiteIng: Int = 0
+    @State var uniteIng: Unite = Unite.Kg
+    @State var coutUnitIng: Double = 0.0
+    
+    let formatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    return formatter
+    }()
+    
+    var body: some View {
+        VStack(alignment:.leading){
+            Text("Ajouter un ingrédient")
+            .font(.title)
+            .bold()
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.all)
+            
+            HStack{
+                Text("Nom : ")
+                TextField("Nom de l'ingrédient", text: $nomIng)
+            }
+            .padding()
+            
+            HStack{
+                Text("Catégorie : ")
+                Picker(selection: $catIng, label: Text("Catégorie de l'ingrédient")){
+                    Text("Viande").tag(CategorieIngredient.Viande)
+                    Text("Légumes").tag(CategorieIngredient.Legumes)
+                }
+            }
+            .padding()
+            
+            HStack{
+                Text("Quantité : ")
+                TextField("Quantité de l'ingrédient", value: $quantiteIng, formatter: formatter)
+            }
+            .padding()
+            
+            HStack{
+                Text("Unité : ")
+                Picker(selection: $uniteIng, label: Text("Unité pour cette ingrédient")){
+                    Text("g").tag(Unite.g)
+                    Text("L").tag(Unite.L)
+                    Text("Kg").tag(Unite.Kg)
+                    Text("mL").tag(Unite.mL)
+                }
+            }
+            .padding()
+            
+            HStack{
+                Text("Coût unitaire : ")
+                TextField("Coût unitaire pour l'ingrédient", value: $coutUnitIng, formatter: formatter)
+            }
+            .padding()
+            
+            HStack{
+                Button("Ajouter cette ingrédient" ,action: {})
+                .buttonStyle(.bordered)
+            }
+            .padding()
+            
+        }
+    }
+}
+
 struct ListIngredientView: View {
+    
+    @State private var showingSheet = false
     
     //Tableau d'ingrédients provisoire pour tester la vue
     var tabIng : [Ingredient] = [
@@ -22,6 +96,8 @@ struct ListIngredientView: View {
     var body: some View {
         NavigationView{
             VStack{
+                
+    
                 List{
                     ForEach(tabIng, id: \.id) {
                         ingredient in
@@ -35,9 +111,15 @@ struct ListIngredientView: View {
                         }
                     }
                 }
-                
             }
-            .navigationTitle("Liste des ingrédients")
+            .navigationTitle("Ingrédients")
+            .navigationBarItems(trailing:
+                                    Button(action: {showingSheet.toggle()}){
+                Label("Ajouter", systemImage: "plus")
+            })
+            .sheet(isPresented: $showingSheet) {
+                SheetView()
+            }
         }
     }
 }

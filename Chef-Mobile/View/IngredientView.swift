@@ -10,9 +10,28 @@ import SwiftUI
 
 struct IngredientView: View {
     
+    
     var body : some View {
-        VStack {
+        VStack{
+            HStack{
+                Text("Nom de l'ingrédient :")
+            }
+            .padding()
             
+            HStack{
+                Text("Catégorie de l'ingrédient :")
+            }
+            .padding()
+            
+            HStack{
+                Text("Quantié de l'ingrédient :")
+            }
+            .padding()
+            
+            HStack{
+                Text("Coût unitaire de l'ingrédient :")
+            }
+            .padding()
         }
     }
 }
