@@ -7,11 +7,18 @@
 
 import SwiftUI
 
+import Firebase
+
 @main
 struct Chef_MobileApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListIngredientView(vm: ListIngredientViewModel())
         }
     }
 }

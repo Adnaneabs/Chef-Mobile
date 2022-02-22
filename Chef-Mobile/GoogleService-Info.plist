@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>260340423956-s9hj6ktunqrh0nddtevib5lsjmcr8rb1.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.260340423956-s9hj6ktunqrh0nddtevib5lsjmcr8rb1</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDc1xvp-qlGdLzGmAdwyvMvzZZFLQiLodE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>260340423956</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>AE.Chef-Mobile</string>
+	<key>PROJECT_ID</key>
+	<string>projet-awi-d0535</string>
+	<key>STORAGE_BUCKET</key>
+	<string>projet-awi-d0535.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:260340423956:ios:c4f045ae69ff73a1c0f601</string>
+	<key>DATABASE_URL</key>
+	<string>https://projet-awi-d0535-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

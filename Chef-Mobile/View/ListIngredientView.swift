@@ -84,29 +84,29 @@ struct ListIngredientView: View {
     
     @State private var showingSheet = false
     
-    //Tableau d'ingrédients provisoire pour tester la vue
-    var tabIng : [Ingredient] = [
-        Ingredient(id: 0, nom: "Poulet", categorie: CategorieIngredient.Viande, quantite: 3, unite: Unite.Kg, coutUnitaire: 2.5),
+    @ObservedObject var listIngredientVM : ListIngredientViewModel
+    
+    var intentIngredient: IntentIngredient
+    
+    init(vm: ListIngredientViewModel){
+        self.listIngredientVM = vm
+        self.intentIngredient = IntentIngredient()
+        self.intentIngredient.addObserver(viewModel: vm)
         
-        Ingredient(id: 1, nom: "Carotte", categorie: CategorieIngredient.Legumes, quantite: 1, unite: Unite.Kg, coutUnitaire: 0.5),
-        
-        Ingredient(id: 2, nom: "Salade", categorie: CategorieIngredient.Legumes, quantite: 500, unite: Unite.g, coutUnitaire: 1.0)
-    ]
+    }
     
     var body: some View {
         NavigationView{
             VStack{
-                
-    
                 List{
-                    ForEach(tabIng, id: \.id) {
+                    ForEach(listIngredientVM.model, id: \.id) {
                         ingredient in
-                        NavigationLink(destination: IngredientView())
+                        NavigationLink(destination: IngredientView(vm: IngredientViewModel(ingredient: ingredient), listVm: listIngredientVM))
                         {
                             VStack(alignment: .leading){
                                 Text(ingredient.nom).bold()
-                                Text("\(ingredient.categorie.rawValue)")
-                                Text("\(ingredient.quantite) \(ingredient.unite.rawValue) ")
+                                Text("\(ingredient.categorie)")
+                                Text("\(ingredient.quantite) \(ingredient.unite) ")
                             }
                         }
                     }
@@ -126,6 +126,8 @@ struct ListIngredientView: View {
 
 struct ListIngredientView_Previews: PreviewProvider {
     static var previews: some View {
-        ListIngredientView()
+        
+        ListIngredientView(vm: ListIngredientViewModel())
+        
     }
 }
