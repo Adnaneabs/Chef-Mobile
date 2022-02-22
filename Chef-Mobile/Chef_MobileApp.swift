@@ -18,7 +18,8 @@ struct Chef_MobileApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ListIngredientView(vm: ListIngredientViewModel())
+//            ListIngredientView(vm: ListIngredientViewModel())
+            ConnexionView()
         }
     }
 }
