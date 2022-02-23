@@ -11,12 +11,17 @@ import SwiftUI
 struct SheetView: View {
     @Environment(\.dismiss) var dismiss
     
-    //Les states var sont provisoires pour tester la vue
-    @State var nomIng: String = ""
-    @State var catIng: CategorieIngredient = CategorieIngredient.Viande
-    @State var quantiteIng: Int = 0
-    @State var uniteIng: Unite = Unite.Kg
-    @State var coutUnitIng: Double = 0.0
+    @ObservedObject var listIngredientVM : ListIngredientViewModel
+    @State var ingredient : Ingredient = Ingredient(id: "", nom: "", categorie: "", quantite: 0, unite: "", coutUnitaire: 0)
+    
+    
+    var intentIngredient: IntentIngredient
+    
+    init(vm: ListIngredientViewModel){
+        self.listIngredientVM = vm
+        self.intentIngredient = IntentIngredient()
+        self.intentIngredient.addObserver(viewModel: listIngredientVM)
+    }
     
     let formatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -34,50 +39,46 @@ struct SheetView: View {
             
             HStack{
                 Text("Nom : ")
-                TextField("Nom de l'ingrédient", text: $nomIng)
+                TextField("Nom de l'ingrédient", text: $ingredient.nom)
             }
             .padding()
             
             HStack{
                 Text("Catégorie : ")
-                Picker(selection: $catIng, label: Text("Catégorie de l'ingrédient")){
-                    Text("Viande").tag(CategorieIngredient.Viande)
-                    Text("Légumes").tag(CategorieIngredient.Legumes)
+                TextField("Catégorie de l'ingrédient", text: $ingredient.categorie)
                 }
             }
             .padding()
             
             HStack{
                 Text("Quantité : ")
-                TextField("Quantité de l'ingrédient", value: $quantiteIng, formatter: formatter)
+                TextField("Quantité de l'ingrédient", value: $ingredient.quantite, formatter: formatter)
             }
             .padding()
             
             HStack{
                 Text("Unité : ")
-                Picker(selection: $uniteIng, label: Text("Unité pour cette ingrédient")){
-                    Text("g").tag(Unite.g)
-                    Text("L").tag(Unite.L)
-                    Text("Kg").tag(Unite.Kg)
-                    Text("mL").tag(Unite.mL)
-                }
+                TextField("Unité de l'ingrédient", text: $ingredient.unite)
             }
             .padding()
             
             HStack{
                 Text("Coût unitaire : ")
-                TextField("Coût unitaire pour l'ingrédient", value: $coutUnitIng, formatter: formatter)
+                TextField("Coût unitaire pour l'ingrédient", value: $ingredient.coutUnitaire , formatter: formatter)
             }
             .padding()
             
             HStack{
-                Button("Ajouter cette ingrédient" ,action: {})
+                Button("Ajouter cette ingrédient" ,action: {
+                    intentIngredient.intentToChange(ingredient: Ingredient(id: UUID().uuidString, nom: ingredient.nom, categorie: ingredient.categorie, quantite: ingredient.quantite, unite: ingredient.unite, coutUnitaire: ingredient.coutUnitaire))
+                        dismiss()
+                })
                 .buttonStyle(.bordered)
             }
             .padding()
             
         }
-    }
+    
 }
 
 struct ListIngredientView: View {
@@ -92,7 +93,6 @@ struct ListIngredientView: View {
         self.listIngredientVM = vm
         self.intentIngredient = IntentIngredient()
         self.intentIngredient.addObserver(viewModel: vm)
-        
     }
     
     var body: some View {
@@ -119,7 +119,7 @@ struct ListIngredientView: View {
                 Label("Ajouter", systemImage: "plus")
             })
             .sheet(isPresented: $showingSheet) {
-                SheetView()
+                SheetView(vm: listIngredientVM)
             }
     }
 }

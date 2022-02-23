@@ -42,6 +42,16 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
             }
     }
     
+    func ajoutIngredient(ing: Ingredient){
+        do {
+            let _ = try firestore.collection("Ingrédients").addDocument(data: ["nom" : ing.nom , "categorie" : ing.categorie ,
+                                                                               "coutUnitaire" : ing.coutUnitaire , "quantite" : ing.quantite,
+                                                                               "unite" : ing.unite])
+        } catch {
+            print(error)
+        }
+    }
+    
     func updateIngredient(id: String){
         var newIngredient : Ingredient
         var i = 0
@@ -72,6 +82,8 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
             self.objectWillChange.send()
         case .IngredientChanging(let id):
             self.updateIngredient(id: id)
+        case .ajoutIngredient(let ingredient):
+            self.ajoutIngredient(ing: ingredient)
         default:
             break
         }

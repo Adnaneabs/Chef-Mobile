@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-enum IntentStateIngredient :  Equatable {
+enum IntentStateIngredient{
     case ready
     case nomChanging(String)
     case categorieChanging(String)
@@ -16,6 +16,7 @@ enum IntentStateIngredient :  Equatable {
     case uniteChanging(String)
     case coutUnitaireChanging(Double)
     case IngredientChanging(String)
+    case ajoutIngredient(Ingredient)
     case updatingList
 }
 
@@ -57,6 +58,11 @@ struct IntentIngredient {
     
     func intentToChange(idIngredient: String){
         self.state.send(.IngredientChanging(idIngredient))
+        self.state.send(.updatingList)
+    }
+    
+    func intentToChange(ingredient: Ingredient){
+        self.state.send(.ajoutIngredient(ingredient))
         self.state.send(.updatingList)
     }
     
