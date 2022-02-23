@@ -96,7 +96,6 @@ struct ListIngredientView: View {
     }
     
     var body: some View {
-        NavigationView{
             VStack{
                 List{
                     ForEach(listIngredientVM.model, id: \.id) {
@@ -113,6 +112,8 @@ struct ListIngredientView: View {
                 }
             }
             .navigationTitle("Ingrédients")
+            .background(.red)
+            .navigationBarBackButtonHidden(true)
             .navigationBarItems(trailing:
                                     Button(action: {showingSheet.toggle()}){
                 Label("Ajouter", systemImage: "plus")
@@ -120,7 +121,6 @@ struct ListIngredientView: View {
             .sheet(isPresented: $showingSheet) {
                 SheetView()
             }
-        }
     }
 }
 

@@ -8,14 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var viewModel : ConnexionViewModel
+    
     var body: some View {
         NavigationView{
-            NavigationLink(destination : ConnexionView()){
-                Text("Connexion")
-            }
+            VStack(alignment: .center){
+                NavigationLink(destination : ConnexionView()){
+                    Text("Connexion")
+                }
+                .padding()
+                .buttonStyle(.bordered)
+                NavigationLink(destination : ContentView()){
+                    Text("Fiches Techniques")
+                }
+                .padding()
+                .buttonStyle(.bordered)
+            }.padding(.bottom,100)
+            
         }
-        .padding()
+//        .padding()
+        .onAppear(perform: {
+            viewModel.signedIn = viewModel.isSignedIn
+        })
     }
+        
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -23,3 +39,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
