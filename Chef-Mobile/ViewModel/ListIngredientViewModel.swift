@@ -70,6 +70,16 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
              , "coutUnitaire" : newIngredient.coutUnitaire], merge:true)
     }
     
+    func supprimerIngredient(indexSet : IndexSet){
+        indexSet.map{
+            model[$0]
+        }.forEach {
+            ing in let ingId = ing.id
+            let docRef = firestore.collection("Ingrédients").document(ingId)
+            docRef.delete()
+        }
+    }
+    
     typealias Input = IntentStateIngredient
     
     typealias Failure = Never
@@ -84,6 +94,8 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
             self.updateIngredient(id: id)
         case .ajoutIngredient(let ingredient):
             self.ajoutIngredient(ing: ingredient)
+        case .supprimerIngredient(let indexSet):
+            self.supprimerIngredient(indexSet: indexSet)
         default:
             break
         }

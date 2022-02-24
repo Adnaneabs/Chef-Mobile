@@ -17,6 +17,7 @@ enum IntentStateIngredient{
     case coutUnitaireChanging(Double)
     case IngredientChanging(String)
     case ajoutIngredient(Ingredient)
+    case supprimerIngredient(IndexSet)
     case updatingList
 }
 
@@ -63,6 +64,11 @@ struct IntentIngredient {
     
     func intentToChange(ingredient: Ingredient){
         self.state.send(.ajoutIngredient(ingredient))
+        self.state.send(.updatingList)
+    }
+    
+    func intentToChange(indexSet: IndexSet){
+        self.state.send(.supprimerIngredient(indexSet))
         self.state.send(.updatingList)
     }
     

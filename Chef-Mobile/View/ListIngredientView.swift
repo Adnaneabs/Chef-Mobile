@@ -85,6 +85,10 @@ struct ListIngredientView: View {
     
     @State private var showingSheet = false
     
+    @State private var presentActionSheet = false
+    
+    @State private var indexToSupress : IndexSet = IndexSet()
+    
     @ObservedObject var listIngredientVM : ListIngredientViewModel
     
     var intentIngredient: IntentIngredient
@@ -108,6 +112,11 @@ struct ListIngredientView: View {
                                 Text("\(ingredient.quantite) \(ingredient.unite) ")
                             }
                         }
+                        }
+                    .onDelete {
+                        (indexSet) in
+                        self.indexToSupress = indexSet
+                        self.presentActionSheet.toggle()
                     }
                 }
             }
@@ -121,8 +130,21 @@ struct ListIngredientView: View {
             .sheet(isPresented: $showingSheet) {
                 SheetView(vm: listIngredientVM)
             }
+        
+            .actionSheet(isPresented: $presentActionSheet) {
+                ActionSheet(title: Text("Êtes-vous-sûre de vouloir supprimer cette ingrédient ?"),
+                            buttons: [
+                                .destructive(Text("Supprimer"),
+                                             action: { self.handleSuppresionIngredient(indexToSupress: indexToSupress) }),
+                                .cancel()])
+            }
+    }
+    
+    func handleSuppresionIngredient(indexToSupress: IndexSet) {
+        intentIngredient.intentToChange(indexSet: indexToSupress)
     }
 }
+
 
 struct ListIngredientView_Previews: PreviewProvider {
     static var previews: some View {
