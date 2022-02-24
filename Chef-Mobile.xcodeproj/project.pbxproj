@@ -15,6 +15,7 @@
 		0C66593827C5068F00E2B275 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0C66593727C5068F00E2B275 /* FirebaseFirestore */; };
 		0C66593A27C5068F00E2B275 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 0C66593927C5068F00E2B275 /* FirebaseFirestoreSwift-Beta */; };
 		0C66593E27C509E700E2B275 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C66593D27C509E700E2B275 /* GoogleService-Info.plist */; };
+		0C77883227C7F7A5009A097F /* SheetViewAjoutIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C77883127C7F7A5009A097F /* SheetViewAjoutIngredient.swift */; };
 		0CF37C6B27C38E9A006FA69C /* CategorieIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C6A27C38E9A006FA69C /* CategorieIngredient.swift */; };
 		0CF37C6D27C38F2A006FA69C /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C6C27C38F2A006FA69C /* Ingredient.swift */; };
 		0CF37C6F27C38F70006FA69C /* Unite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C6E27C38F70006FA69C /* Unite.swift */; };
@@ -55,6 +56,7 @@
 		0C0DC77927C4E12A00200640 /* ListIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientViewModel.swift; sourceTree = "<group>"; };
 		0C0DC77B27C4E16600200640 /* IngredientList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
 		0C66593D27C509E700E2B275 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0C77883127C7F7A5009A097F /* SheetViewAjoutIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewAjoutIngredient.swift; sourceTree = "<group>"; };
 		0CF37C6A27C38E9A006FA69C /* CategorieIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieIngredient.swift; sourceTree = "<group>"; };
 		0CF37C6C27C38F2A006FA69C /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
 		0CF37C6E27C38F70006FA69C /* Unite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unite.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				0CF37C7527C39241006FA69C /* ListIngredientView.swift */,
 				0CF37C7727C396AE006FA69C /* IngredientView.swift */,
 				D00772FB27C4D30900490ACC /* ConnexionView.swift */,
+				0C77883127C7F7A5009A097F /* SheetViewAjoutIngredient.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -343,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C77883227C7F7A5009A097F /* SheetViewAjoutIngredient.swift in Sources */,
 				0CF37C7827C396AE006FA69C /* IngredientView.swift in Sources */,
 				0C0DC77A27C4E12A00200640 /* ListIngredientViewModel.swift in Sources */,
 				0C0DC77327C4D79400200640 /* IngredientViewModel.swift in Sources */,
