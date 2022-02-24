@@ -43,13 +43,15 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
     }
     
     func ajoutIngredient(ing: Ingredient){
-        do {
-            let _ = try firestore.collection("Ingrédients").addDocument(data: ["nom" : ing.nom , "categorie" : ing.categorie ,
+        firestore.collection("Ingrédients").addDocument(data: ["nom" : ing.nom , "categorie" : ing.categorie ,
                                                                                "coutUnitaire" : ing.coutUnitaire , "quantite" : ing.quantite,
-                                                                               "unite" : ing.unite])
-        } catch {
-            print(error)
+                                                               "unite" : ing.unite]) {
+            error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
         }
+    
     }
     
     func updateIngredient(id: String){
@@ -67,7 +69,12 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
         
         firestore.collection("Ingrédients").document(id).setData(
             ["nom" : newIngredient.nom, "categorie" : newIngredient.categorie, "quantite" : newIngredient.quantite
-             , "coutUnitaire" : newIngredient.coutUnitaire], merge:true)
+             , "coutUnitaire" : newIngredient.coutUnitaire], merge:true) {
+                 error in
+                 if let error = error {
+                     print(error.localizedDescription)
+                 }
+             }
     }
     
     func supprimerIngredient(indexSet : IndexSet){
@@ -76,7 +83,11 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
         }.forEach {
             ing in let ingId = ing.id
             let docRef = firestore.collection("Ingrédients").document(ingId)
-            docRef.delete()
+            docRef.delete() { error in
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
         }
     }
     
