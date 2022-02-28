@@ -10,9 +10,17 @@ import SwiftUI
 
 struct IngredientView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     @ObservedObject var vm : IngredientViewModel
     @ObservedObject var listVm : ListIngredientViewModel
     var intent: IntentIngredient
+    
+    @State var showingAlertBouttonModif : Bool = false
+    @State var errorMessageModif = "L'ingrédient ne peut pas être modifié car certains champs ne sont pas remplis."
+    
+    @State var errorMessageChamp = ""
+    @State var showingAlertChamp : Bool = false
     
     let formatter: NumberFormatter = {
     let formatter = NumberFormatter()
@@ -68,9 +76,46 @@ struct IngredientView: View {
             
             HStack{
                 Button("Modifier l'ingrédient", action:{
-                    intent.intentToChange(idIngredient: vm.id)
+                    if(vm.isPossibleToSendIngredient()){
+                        intent.intentToChange(idIngredient: vm.id)
+                        dismiss()
+                    } else {
+                        self.showingAlertBouttonModif = true
+                    }
                 })
             }
+        }
+        
+        .onChange(of: vm.error){ error in
+            switch error {
+            case .noError:
+                return
+            case .nomError:
+                self.errorMessageChamp = "\(error)"
+                self.showingAlertChamp = true
+            case .coutUnitaireError:
+                self.errorMessageChamp = "\(error)"
+                self.showingAlertChamp = true
+            case .uniteError:
+                self.errorMessageChamp = "\(error)"
+                self.showingAlertChamp = true
+            case .categorieError:
+                self.errorMessageChamp = "\(error)"
+                self.showingAlertChamp = true
+            case .quantiteErrror:
+                self.errorMessageChamp = "\(error)"
+                self.showingAlertChamp = true
+            }
+        }
+        
+        //Message d'erreur pour les champs
+        .alert("\(errorMessageChamp)", isPresented: $showingAlertChamp){
+            Button("Ok", role: .cancel){}
+        }
+        
+        //Message d'erreur si la modification ne peut pas être effectué
+        .alert("\(errorMessageModif)", isPresented: $showingAlertBouttonModif){
+            Button("Ok", role: .cancel){}
         }
     }
 }
