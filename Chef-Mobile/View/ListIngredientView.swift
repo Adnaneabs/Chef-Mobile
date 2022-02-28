@@ -38,18 +38,56 @@ struct ListIngredientView: View {
     }
     
     var body: some View {
-            VStack{
                 List{
                     ForEach(searchIngredient, id: \.id) {
                         ingredient in
                         NavigationLink(destination: IngredientView(vm: IngredientViewModel(ingredient: ingredient), listVm: listIngredientVM))
                         {
-                            VStack(alignment: .leading){
-                                Text(ingredient.nom).bold()
-                                Text("\(ingredient.categorie)")
-                                Text("\(ingredient.quantite) \(ingredient.unite) ")
+                                HStack{
+                                ZStack{
+                                    Circle()
+                                        .fill(
+                                        LinearGradient(
+                                            gradient: Gradient(colors: [.red, .pink]),
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                            )
+                                        )
+                                    VStack {
+                                        Text("\(ingredient.quantite)")
+                                        .font(.system(size: 20, weight: .bold))
+                                        .foregroundColor(.white)
+                                                            
+                                        Text("\(ingredient.unite)")
+                                            .font(.caption)
+                                            .foregroundColor(.white)
+                                        }
+                                }
+                                .frame(width: 70, height: 70, alignment: .center)
+                                
+                                
+                                VStack(alignment: .leading){
+                                    Text(ingredient.nom)
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .lineLimit(2)
+                                        .padding(.bottom, 5)
+                                    
+                                    Text("\(ingredient.categorie)")
+                                        .padding(5)
+                                        .font(.system(size: 12.0, weight: .regular))
+                                        .lineLimit(2)
+                                        .foregroundColor(.white)
+                                        .background(Color.green)
+                                        .cornerRadius(5)
+                                }
+                            
+                                .padding(.horizontal, 5)
+                                }
+                                .padding(15)
+                            .clipShape(RoundedRectangle(cornerRadius: 15))
                             }
-                        }
+                   
                         }
                     .onDelete {
                         (indexSet) in
@@ -58,10 +96,9 @@ struct ListIngredientView: View {
                     }
                     
                 }
-                .searchable(text: $searchString)
-            }
+                
+            .searchable(text: $searchString)
             .navigationTitle("Ingrédients")
-            .background(.red)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(trailing:
                                     Button(action: {showingSheet.toggle()}){
@@ -78,6 +115,7 @@ struct ListIngredientView: View {
                                              action: { self.handleSuppresionIngredient(indexToSupress: indexToSupress)}),
                                 .cancel()])
             }
+        
     }
     
     func handleSuppresionIngredient(indexToSupress: IndexSet) {

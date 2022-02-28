@@ -46,62 +46,93 @@ struct SheetViewAjoutIngredient: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(.all)
             
-            HStack{
+            VStack(alignment: .leading){
                 Text("Nom : ")
+                    .font(.headline)
                 TextField("Nom de l'ingrédient", text: $ingredientVM.nom)
                     .onSubmit {
                         intentIngredient.intentToChange(nomIngredient: ingredientVM.nom)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
-            HStack{
+            VStack(alignment: .leading){
                 Text("Catégorie : ")
+                    .font(.headline)
                 TextField("Catégorie de l'ingrédient", text: $ingredientVM.categorie)
                     .onSubmit {
                         intentIngredient.intentToChange(categorieIngredient: ingredientVM.categorie)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
                 }
             }
             .padding()
             
-            HStack{
+        VStack(alignment: .leading){
                 Text("Quantité : ")
+                .font(.headline)
                 TextField("Quantité de l'ingrédient", value: $ingredientVM.quantite, formatter: formatter)
                     .onSubmit {
                         intentIngredient.intentToChange(quantiteIngredient: ingredientVM.quantite)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
-            HStack{
+        VStack(alignment: .leading){
                 Text("Unité : ")
+                .font(.headline)
                 TextField("Unité de l'ingrédient", text: $ingredientVM.unite)
                     .onSubmit {
                         intentIngredient.intentToChange(uniteIngredient: ingredientVM.unite)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
-            HStack{
+        VStack(alignment: .leading){
                 Text("Coût unitaire : ")
+                .font(.headline)
                 TextField("Coût unitaire pour l'ingrédient", value: $ingredientVM.coutUnitaire , formatter: formatter)
                     .onSubmit {
                         intentIngredient.intentToChange(coutUnitIngredient: ingredientVM.coutUnitaire)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
             HStack{
-                Button("Ajouter cette ingrédient" ,action: {
+                Button(action: {
                     if(ingredientVM.isPossibleToSendIngredient()){
                         intentIngredient.intentToChange(ingredient: Ingredient(id: UUID().uuidString, nom: ingredientVM.nom, categorie: ingredientVM.categorie, quantite: ingredientVM.quantite, unite: ingredientVM.unite, coutUnitaire: ingredientVM.coutUnitaire))
                         dismiss()
                     } else {
                         self.showingAlert = true
                     }
-                })
-                .buttonStyle(.bordered)
+                }) {
+                    HStack {
+                        Spacer()
+                        Text("Ajouter cette ingrédient")
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        Spacer()
+                    }
+                }
+                .padding(.vertical, 10.0)
+                .background(Color.red)
+                .cornerRadius(4.0)
+                .padding(.horizontal, 50)
             }
             .padding()
         
