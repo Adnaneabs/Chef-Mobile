@@ -8,6 +8,18 @@
 import Foundation
 import Combine
 
+enum IngredientViewModelError : Error, CustomStringConvertible, Equatable {
+    case noError
+    case nameError(String)
+    
+    var description: String {
+        switch self {
+        case .nameError(_) : return "Le champ nom ne peut pas être vide"
+        case .noError : return "No error"
+        }
+    }
+}
+
 class IngredientViewModel : ObservableObject, IngredientObserver, Subscriber {
     
     var ingredientModel: Ingredient
@@ -18,6 +30,7 @@ class IngredientViewModel : ObservableObject, IngredientObserver, Subscriber {
     @Published var quantite : Int
     @Published var unite : String
     @Published var coutUnitaire : Double
+    
     
     typealias Input = IntentStateIngredient
     
