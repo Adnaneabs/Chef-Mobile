@@ -11,8 +11,12 @@ import SwiftUI
 struct SheetViewAjoutIngredient: View {
     @Environment(\.dismiss) var dismiss
     
-    @State var errorMessage = "Error !"
     @State var showingAlert : Bool = false
+    
+    @State var errorMessageEnvoi = "L'ingrédient ne peut pas être ajouté car certains champs ne sont pas remplis."
+    
+    @State var errorMessageChamp = ""
+    @State var showingAlertChamp : Bool = false
     
     @ObservedObject var ingredientVM : IngredientViewModel = IngredientViewModel(ingredient: Ingredient(id: "", nom: "", categorie: "", quantite: 0, unite: "", coutUnitaire: 0))
     
@@ -90,45 +94,48 @@ struct SheetViewAjoutIngredient: View {
             
             HStack{
                 Button("Ajouter cette ingrédient" ,action: {
-                    if(isPossibleToSend()){
+                    if(ingredientVM.isPossibleToSendIngredient()){
                         intentIngredient.intentToChange(ingredient: Ingredient(id: UUID().uuidString, nom: ingredientVM.nom, categorie: ingredientVM.categorie, quantite: ingredientVM.quantite, unite: ingredientVM.unite, coutUnitaire: ingredientVM.coutUnitaire))
                         dismiss()
+                    } else {
+                        self.showingAlert = true
                     }
                 })
                 .buttonStyle(.bordered)
             }
             .padding()
         
-            .alert("\(errorMessage)", isPresented: $showingAlert){
+            .onChange(of: ingredientVM.error){ error in
+                switch error {
+                case .noError:
+                    return
+                case .nomError:
+                    self.errorMessageChamp = "\(error)"
+                    self.showingAlertChamp = true
+                case .coutUnitaireError:
+                    self.errorMessageChamp = "\(error)"
+                    self.showingAlertChamp = true
+                case .uniteError:
+                    self.errorMessageChamp = "\(error)"
+                    self.showingAlertChamp = true
+                case .categorieError:
+                    self.errorMessageChamp = "\(error)"
+                    self.showingAlertChamp = true
+                case .quantiteErrror:
+                    self.errorMessageChamp = "\(error)"
+                    self.showingAlertChamp = true
+                }
+            }
+            
+            //Message d'erreur pour les champs
+            .alert("\(errorMessageChamp)", isPresented: $showingAlertChamp){
+                Button("Ok", role: .cancel){}
+            }
+            
+            //Message d'erreur si l'envoi ne peut pas être effectué
+            .alert("\(errorMessageEnvoi)", isPresented: $showingAlert){
                 Button("Ok", role: .cancel){}
             }
             
         }
-    
-    func isPossibleToSend() -> Bool {
-        var possible : Bool = true
-        if(ingredientVM.nom.isEmpty){
-            possible = false
-            self.errorMessage = "Le nom ne peut pas être vide"
-            self.showingAlert = true
-        } else if(ingredientVM.categorie.isEmpty){
-            possible = false
-            self.errorMessage = "La catégorie ne peut pas être vide"
-            self.showingAlert = true
-        } else if(ingredientVM.quantite == 0){
-            possible = false
-            self.errorMessage = "La quantité ne peut pas être 0"
-            self.showingAlert = true
-        } else if(ingredientVM.unite.isEmpty){
-            possible = false
-            self.errorMessage = "L'unité ne peut pas être vide"
-            self.showingAlert = true
-        } else if(ingredientVM.coutUnitaire.isZero){
-            possible = false
-            self.errorMessage = "Le coût unitaire ne peut pas être 0"
-            self.showingAlert = true
-        }
-        
-        return possible
-    }
 }
