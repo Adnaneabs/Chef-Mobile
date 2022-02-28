@@ -51,7 +51,6 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
                 print(error.localizedDescription)
             }
         }
-    
     }
     
     func updateIngredient(id: String){
@@ -90,6 +89,18 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
             }
         }
     }
+    
+    
+    func searchIngredientByName(nom : String) -> [Ingredient] {
+        var tabIngredient : [Ingredient] = []
+        for i in 0..<self.model.count {
+            if(self.model[i].nom.contains(nom)){
+                tabIngredient.append(self.model[i])
+            }
+        }
+        return tabIngredient
+    }
+    
     
     typealias Input = IntentStateIngredient
     

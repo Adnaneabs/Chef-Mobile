@@ -16,6 +16,17 @@ struct ListIngredientView: View {
     
     @State private var indexToSupress : IndexSet = IndexSet()
     
+    //Pour la searchBar
+    @State private var searchString = ""
+    
+    var searchIngredient : [Ingredient] {
+        if searchString.isEmpty {
+            return listIngredientVM.model
+        } else {
+            return listIngredientVM.searchIngredientByName(nom: searchString)
+        }
+    }
+    
     @ObservedObject var listIngredientVM : ListIngredientViewModel
     
     var intentIngredient: IntentIngredient
@@ -29,7 +40,7 @@ struct ListIngredientView: View {
     var body: some View {
             VStack{
                 List{
-                    ForEach(listIngredientVM.model, id: \.id) {
+                    ForEach(searchIngredient, id: \.id) {
                         ingredient in
                         NavigationLink(destination: IngredientView(vm: IngredientViewModel(ingredient: ingredient), listVm: listIngredientVM))
                         {
@@ -45,7 +56,9 @@ struct ListIngredientView: View {
                         self.indexToSupress = indexSet
                         self.presentActionSheet.toggle()
                     }
+                    
                 }
+                .searchable(text: $searchString)
             }
             .navigationTitle("Ingrédients")
             .background(.red)
@@ -62,7 +75,7 @@ struct ListIngredientView: View {
                 ActionSheet(title: Text("Êtes-vous-sûre de vouloir supprimer cette ingrédient ?"),
                             buttons: [
                                 .destructive(Text("Supprimer"),
-                                             action: { self.handleSuppresionIngredient(indexToSupress: indexToSupress) }),
+                                             action: { self.handleSuppresionIngredient(indexToSupress: indexToSupress)}),
                                 .cancel()])
             }
     }
