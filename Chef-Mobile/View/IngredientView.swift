@@ -37,52 +37,80 @@ struct IngredientView: View {
     }
     
     var body : some View {
-        VStack{
-            HStack{
+        VStack(alignment: .leading){
+            VStack(alignment: .leading){
                 Text("Nom de l'ingrédient : ")
+                    .font(.headline)
                 TextField("Nom", text:$vm.nom)
                     .onSubmit {
                         intent.intentToChange(nomIngredient: vm.nom)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
-            HStack{
+            VStack(alignment: .leading){
                 Text("Catégorie de l'ingrédient : ")
+                    .font(.headline)
                 TextField("Catégorie", text:$vm.categorie)
                     .onSubmit {
                         intent.intentToChange(categorieIngredient: vm.categorie)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
-            HStack{
+            VStack(alignment: .leading){
                 Text("Quantié de l'ingrédient : ")
+                    .font(.headline)
                 TextField("Quantité", value:$vm.quantite, formatter: formatter)
                     .onSubmit {
                         intent.intentToChange(quantiteIngredient: vm.quantite)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
-            HStack{
+            VStack(alignment: .leading){
                 Text("Coût unitaire de l'ingrédient : ")
+                    .font(.headline)
                 TextField("Coût unitaire", value:$vm.coutUnitaire, formatter: formatter)
                     .onSubmit {
                         intent.intentToChange(coutUnitIngredient: vm.coutUnitaire)
                     }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
             }
             .padding()
             
             HStack{
-                Button("Modifier l'ingrédient", action:{
+                Button(action:{
                     if(vm.isPossibleToSendIngredient()){
                         intent.intentToChange(idIngredient: vm.id)
                         dismiss()
                     } else {
                         self.showingAlertBouttonModif = true
                     }
-                })
+                }) {
+                    HStack {
+                        Spacer()
+                        Text("Modifier l'ingrédient")
+                        .font(.headline)
+                        .foregroundColor(Color.white)
+                        Spacer()
+                    }
+                }
+                .padding(.vertical, 10.0)
+                .background(Color.red)
+                .cornerRadius(4.0)
+                .padding(.horizontal, 50)
             }
         }
         
