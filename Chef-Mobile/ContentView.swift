@@ -26,6 +26,7 @@ struct ContentView: View {
             }.padding(.bottom,100)
             
         }
+        .navigationViewStyle(.stack)
 //        .padding()
         .onAppear(perform: {
             viewModel.signedIn = viewModel.isSignedIn

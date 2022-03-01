@@ -7,21 +7,42 @@
 
 import Foundation
 
+protocol FicheTechniqueObserver {
+    func changed(nomFiche: String)
+    //func changed(id: Int)
+    func changed(nomAuteur: String)
+    func changed(nbCouvert: Int)
+    func changed(tabEtape : [Etape])
+}
 
 class FicheTechnique {
     
-    private var id : Int
-    private var nomFiche : String
-    private var nomAuteur : String
-    private var nbCouvert : Int
-    private var tabEtape : [Etape]
+    var id : String
+    var nomFiche : String{
+        didSet {
+            self.observer?.changed(nomFiche: self.nomFiche)
+        }
+    }
+    var nomAuteur : String{
+        didSet {
+            self.observer?.changed(nomAuteur: self.nomAuteur)
+        }
+    }
+    var nbCouvert : Int{
+        didSet {
+            self.observer?.changed(nbCouvert: self.nbCouvert)
+        }
+    }
+    var tabEtape : [Etape]?
     
-    init(id: Int, nomFiche: String, nomAuteur: String, nbCouvert: Int, tabEtape: [Etape]) {
+    var observer : FicheTechniqueObserver?
+    
+    init(id: String, nomFiche: String, nomAuteur: String, nbCouvert: Int, tabEtape: [Etape]?) {
         self.id = id;
         self.nomFiche = nomFiche;
         self.nomAuteur = nomAuteur;
         self.nbCouvert = nbCouvert;
-        self.tabEtape = tabEtape;
+        self.tabEtape = tabEtape ;
     }
     
 }

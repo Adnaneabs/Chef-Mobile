@@ -72,7 +72,8 @@ struct ConnexionView: View {
                         .padding()
                         .buttonStyle(.bordered)
                 }*/
-                ListIngredientView(vm: ListIngredientViewModel())
+                MainView()
+                    .navigationViewStyle(.stack)
             }
             else {
                 EmailPasswordView()

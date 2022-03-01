@@ -24,6 +24,14 @@
 		0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7527C39241006FA69C /* ListIngredientView.swift */; };
 		0CF37C7827C396AE006FA69C /* IngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7727C396AE006FA69C /* IngredientView.swift */; };
 		D00772FC27C4D30900490ACC /* ConnexionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00772FB27C4D30900490ACC /* ConnexionView.swift */; };
+		D01B373227CE465600BD26EE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373127CE465600BD26EE /* MainView.swift */; };
+		D01B373427CE479100BD26EE /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373327CE479100BD26EE /* Home.swift */; };
+		D01B373627CE526C00BD26EE /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373527CE526C00BD26EE /* SettingsView.swift */; };
+		D01B373827CE7B9800BD26EE /* FicheTechniqueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373727CE7B9800BD26EE /* FicheTechniqueViewModel.swift */; };
+		D01B373A27CE83E900BD26EE /* IntentFicheTechnique.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373927CE83E900BD26EE /* IntentFicheTechnique.swift */; };
+		D01B373C27CE90E000BD26EE /* FicheTechniqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */; };
+		D01B374027CE9E6900BD26EE /* ListFicheTechniqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */; };
+		D01B374227CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B374127CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift */; };
 		D0C2C34C27BACBD10093EDDB /* Chef_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */; };
 		D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34D27BACBD10093EDDB /* ContentView.swift */; };
 		D0C2C35027BACBD20093EDDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C2C34F27BACBD20093EDDB /* Assets.xcassets */; };
@@ -65,6 +73,14 @@
 		0CF37C7527C39241006FA69C /* ListIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientView.swift; sourceTree = "<group>"; };
 		0CF37C7727C396AE006FA69C /* IngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientView.swift; sourceTree = "<group>"; };
 		D00772FB27C4D30900490ACC /* ConnexionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionView.swift; sourceTree = "<group>"; };
+		D01B373127CE465600BD26EE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D01B373327CE479100BD26EE /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		D01B373527CE526C00BD26EE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D01B373727CE7B9800BD26EE /* FicheTechniqueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueViewModel.swift; sourceTree = "<group>"; };
+		D01B373927CE83E900BD26EE /* IntentFicheTechnique.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentFicheTechnique.swift; sourceTree = "<group>"; };
+		D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueView.swift; sourceTree = "<group>"; };
+		D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFicheTechniqueView.swift; sourceTree = "<group>"; };
+		D01B374127CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFicheTechniqueViewModel.swift; sourceTree = "<group>"; };
 		D0C2C34827BACBD10093EDDB /* Chef-Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chef-Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef_MobileApp.swift; sourceTree = "<group>"; };
 		D0C2C34D27BACBD10093EDDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -110,6 +126,8 @@
 			children = (
 				0C0DC77227C4D79400200640 /* IngredientViewModel.swift */,
 				0C0DC77927C4E12A00200640 /* ListIngredientViewModel.swift */,
+				D01B373727CE7B9800BD26EE /* FicheTechniqueViewModel.swift */,
+				D01B374127CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -118,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				0C0DC77727C4DF1900200640 /* IntentIngredient.swift */,
+				D01B373927CE83E900BD26EE /* IntentFicheTechnique.swift */,
 			);
 			path = Intents;
 			sourceTree = "<group>";
@@ -142,6 +161,11 @@
 				0CF37C7727C396AE006FA69C /* IngredientView.swift */,
 				D00772FB27C4D30900490ACC /* ConnexionView.swift */,
 				0C77883127C7F7A5009A097F /* SheetViewAjoutIngredient.swift */,
+				D01B373127CE465600BD26EE /* MainView.swift */,
+				D01B373327CE479100BD26EE /* Home.swift */,
+				D01B373527CE526C00BD26EE /* SettingsView.swift */,
+				D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */,
+				D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,15 +370,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01B373A27CE83E900BD26EE /* IntentFicheTechnique.swift in Sources */,
+				D01B374227CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift in Sources */,
+				D01B374027CE9E6900BD26EE /* ListFicheTechniqueView.swift in Sources */,
+				D01B373827CE7B9800BD26EE /* FicheTechniqueViewModel.swift in Sources */,
 				0C77883227C7F7A5009A097F /* SheetViewAjoutIngredient.swift in Sources */,
 				0CF37C7827C396AE006FA69C /* IngredientView.swift in Sources */,
+				D01B373C27CE90E000BD26EE /* FicheTechniqueView.swift in Sources */,
 				0C0DC77A27C4E12A00200640 /* ListIngredientViewModel.swift in Sources */,
+				D01B373627CE526C00BD26EE /* SettingsView.swift in Sources */,
 				0C0DC77327C4D79400200640 /* IngredientViewModel.swift in Sources */,
 				0CF37C6D27C38F2A006FA69C /* Ingredient.swift in Sources */,
 				D00772FC27C4D30900490ACC /* ConnexionView.swift in Sources */,
+				D01B373427CE479100BD26EE /* Home.swift in Sources */,
 				0CF37C7327C3910E006FA69C /* FicheTechnique.swift in Sources */,
 				0CF37C7127C3906E006FA69C /* Etape.swift in Sources */,
 				0C0DC77C27C4E16600200640 /* IngredientList.swift in Sources */,
+				D01B373227CE465600BD26EE /* MainView.swift in Sources */,
 				0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */,
 				0CF37C6B27C38E9A006FA69C /* CategorieIngredient.swift in Sources */,
 				D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */,
