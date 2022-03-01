@@ -23,6 +23,9 @@
 		0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7527C39241006FA69C /* ListIngredientView.swift */; };
 		0CF37C7827C396AE006FA69C /* IngredientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF37C7727C396AE006FA69C /* IngredientView.swift */; };
 		D00772FC27C4D30900490ACC /* ConnexionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D00772FB27C4D30900490ACC /* ConnexionView.swift */; };
+		D014CF7627C61CEC00355C3B /* ConnexionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D014CF7527C61CEC00355C3B /* ConnexionViewModel.swift */; };
+		D09A372B27C6268A0036D1C9 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A372A27C6268A0036D1C9 /* MainView.swift */; };
+		D09A372F27C6379D0036D1C9 /* FichesTechniquesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09A372E27C6379D0036D1C9 /* FichesTechniquesView.swift */; };
 		D0C2C34C27BACBD10093EDDB /* Chef_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */; };
 		D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34D27BACBD10093EDDB /* ContentView.swift */; };
 		D0C2C35027BACBD20093EDDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C2C34F27BACBD20093EDDB /* Assets.xcassets */; };
@@ -63,6 +66,9 @@
 		0CF37C7527C39241006FA69C /* ListIngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientView.swift; sourceTree = "<group>"; };
 		0CF37C7727C396AE006FA69C /* IngredientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientView.swift; sourceTree = "<group>"; };
 		D00772FB27C4D30900490ACC /* ConnexionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionView.swift; sourceTree = "<group>"; };
+		D014CF7527C61CEC00355C3B /* ConnexionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnexionViewModel.swift; sourceTree = "<group>"; };
+		D09A372A27C6268A0036D1C9 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		D09A372E27C6379D0036D1C9 /* FichesTechniquesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FichesTechniquesView.swift; sourceTree = "<group>"; };
 		D0C2C34827BACBD10093EDDB /* Chef-Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chef-Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef_MobileApp.swift; sourceTree = "<group>"; };
 		D0C2C34D27BACBD10093EDDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 			children = (
 				0C0DC77227C4D79400200640 /* IngredientViewModel.swift */,
 				0C0DC77927C4E12A00200640 /* ListIngredientViewModel.swift */,
+				D014CF7527C61CEC00355C3B /* ConnexionViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -139,6 +146,8 @@
 				0CF37C7527C39241006FA69C /* ListIngredientView.swift */,
 				0CF37C7727C396AE006FA69C /* IngredientView.swift */,
 				D00772FB27C4D30900490ACC /* ConnexionView.swift */,
+				D09A372A27C6268A0036D1C9 /* MainView.swift */,
+				D09A372E27C6379D0036D1C9 /* FichesTechniquesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -350,9 +359,12 @@
 				D00772FC27C4D30900490ACC /* ConnexionView.swift in Sources */,
 				0CF37C7327C3910E006FA69C /* FicheTechnique.swift in Sources */,
 				0CF37C7127C3906E006FA69C /* Etape.swift in Sources */,
+				D09A372F27C6379D0036D1C9 /* FichesTechniquesView.swift in Sources */,
 				0C0DC77C27C4E16600200640 /* IngredientList.swift in Sources */,
 				0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */,
+				D09A372B27C6268A0036D1C9 /* MainView.swift in Sources */,
 				0CF37C6B27C38E9A006FA69C /* CategorieIngredient.swift in Sources */,
+				D014CF7627C61CEC00355C3B /* ConnexionViewModel.swift in Sources */,
 				D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */,
 				0C0DC77827C4DF1900200640 /* IntentIngredient.swift in Sources */,
 				D0C2C34C27BACBD10093EDDB /* Chef_MobileApp.swift in Sources */,

@@ -21,8 +21,6 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
     }
     
     func fetchData(){
-
-        
         firestore.collection("Ingrédients")
             .addSnapshotListener{ (data, error) in
                 guard let documents = data?.documents else {

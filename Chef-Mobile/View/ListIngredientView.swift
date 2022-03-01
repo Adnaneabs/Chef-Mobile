@@ -19,18 +19,18 @@ struct SheetView: View {
     @State var coutUnitIng: Double = 0.0
     
     let formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    return formatter
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
     }()
     
     var body: some View {
         VStack(alignment:.leading){
             Text("Ajouter un ingrédient")
-            .font(.title)
-            .bold()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.all)
+                .font(.title)
+                .bold()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.all)
             
             HStack{
                 Text("Nom : ")
@@ -72,7 +72,7 @@ struct SheetView: View {
             
             HStack{
                 Button("Ajouter cette ingrédient" ,action: {})
-                .buttonStyle(.bordered)
+                    .buttonStyle(.bordered)
             }
             .padding()
             
@@ -96,7 +96,8 @@ struct ListIngredientView: View {
     }
     
     var body: some View {
-            VStack{
+        NavigationView{
+            VStack(alignment: .center){
                 List{
                     ForEach(listIngredientVM.model, id: \.id) {
                         ingredient in
@@ -112,8 +113,6 @@ struct ListIngredientView: View {
                 }
             }
             .navigationTitle("Ingrédients")
-            .background(.red)
-            .navigationBarBackButtonHidden(true)
             .navigationBarItems(trailing:
                                     Button(action: {showingSheet.toggle()}){
                 Label("Ajouter", systemImage: "plus")
@@ -121,6 +120,9 @@ struct ListIngredientView: View {
             .sheet(isPresented: $showingSheet) {
                 SheetView()
             }
+        }
+        .navigationBarBackButtonHidden(true)
+        
     }
 }
 
@@ -128,6 +130,5 @@ struct ListIngredientView_Previews: PreviewProvider {
     static var previews: some View {
         
         ListIngredientView(vm: ListIngredientViewModel())
-        
     }
 }
