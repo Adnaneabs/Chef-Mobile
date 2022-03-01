@@ -14,18 +14,17 @@ struct FichesTechniquesView: View {
     var body: some View {
         NavigationView{
             ScrollView(.vertical, showsIndicators: false){
-                Spacer().frame(height: 30)
-                VStack(alignment: .center){
+                VStack(alignment: .leading){
+                    //Text("Fiches Techniques").font(.title)
+                      //  .bold().padding()
                     LazyVGrid(columns: cols){
                         ForEach(1...10, id: \.self){ i in
-                            HStack{
-                                Text("fiche technique \(i)")
-                                    .background().colorMultiply(.green)
-                            }
+                            Text("\(i)")
                         }.padding()
+                        
                     }
-                }
-            }.navigationTitle("Fiches Techniques")
+                }.navigationTitle("Fiches Techniques")
+            }.background(Color(UIColor.systemGray6))
         }
     }
 }

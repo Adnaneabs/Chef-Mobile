@@ -33,7 +33,8 @@ struct ConnexionView: View {
                         .buttonStyle(.bordered)
                 }*/
                 /*ListIngredientView(vm: ListIngredientViewModel())*/
-                MainView()
+                    MainView()
+                
             }
             else {
                 EmailPasswordView()

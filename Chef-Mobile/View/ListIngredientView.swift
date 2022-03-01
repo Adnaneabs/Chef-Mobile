@@ -120,9 +120,10 @@ struct ListIngredientView: View {
             .sheet(isPresented: $showingSheet) {
                 SheetView()
             }
+            
+            
         }
         .navigationBarBackButtonHidden(true)
-        
     }
 }
 

@@ -10,19 +10,18 @@ import SwiftUI
 struct MainView: View {
     var body: some View {
         TabView{
-            ListIngredientView(vm: ListIngredientViewModel())
-                .tabItem{
-                    Label("Liste des ingrédients", systemImage: "list.dash")
-                }
-                
+                ListIngredientView(vm: ListIngredientViewModel())
+                    .tabItem{
+                        Label("Liste des ingrédients", systemImage: "list.dash")
+                    }
             
-            FichesTechniquesView()
-                .tabItem{
-                    Label("Fiches Techniques", systemImage: "star")
-                }
-                
+                FichesTechniquesView()
+                    .tabItem{
+                        Label("Fiches Techniques", systemImage: "star")
+                    }
+                    
+            }
         }
-    }
 }
 
 struct MainView_Previews: PreviewProvider {
