@@ -42,6 +42,17 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
             }
     }
     
+    func ajoutIngredient(ing: Ingredient){
+        firestore.collection("Ingrédients").addDocument(data: ["nom" : ing.nom , "categorie" : ing.categorie ,
+                                                                               "coutUnitaire" : ing.coutUnitaire , "quantite" : ing.quantite,
+                                                               "unite" : ing.unite]) {
+            error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func updateIngredient(id: String){
         var newIngredient : Ingredient
         var i = 0
@@ -57,8 +68,39 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
         
         firestore.collection("Ingrédients").document(id).setData(
             ["nom" : newIngredient.nom, "categorie" : newIngredient.categorie, "quantite" : newIngredient.quantite
-             , "coutUnitaire" : newIngredient.coutUnitaire], merge:true)
+             , "coutUnitaire" : newIngredient.coutUnitaire], merge:true) {
+                 error in
+                 if let error = error {
+                     print(error.localizedDescription)
+                 }
+             }
     }
+    
+    func supprimerIngredient(indexSet : IndexSet){
+        indexSet.map{
+            model[$0]
+        }.forEach {
+            ing in let ingId = ing.id
+            let docRef = firestore.collection("Ingrédients").document(ingId)
+            docRef.delete() { error in
+                if let error = error{
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    
+    func searchIngredientByName(nom : String) -> [Ingredient] {
+        var tabIngredient : [Ingredient] = []
+        for i in 0..<self.model.count {
+            if(self.model[i].nom.contains(nom)){
+                tabIngredient.append(self.model[i])
+            }
+        }
+        return tabIngredient
+    }
+    
     
     typealias Input = IntentStateIngredient
     
@@ -72,6 +114,10 @@ class ListIngredientViewModel : ObservableObject, Subscriber {
             self.objectWillChange.send()
         case .IngredientChanging(let id):
             self.updateIngredient(id: id)
+        case .ajoutIngredient(let ingredient):
+            self.ajoutIngredient(ing: ingredient)
+        case .supprimerIngredient(let indexSet):
+            self.supprimerIngredient(indexSet: indexSet)
         default:
             break
         }
