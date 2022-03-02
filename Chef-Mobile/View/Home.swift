@@ -12,8 +12,11 @@ struct Home: View {
         NavigationView{
             ListFicheTechniqueView(vm : ListFicheTechniqueViewModel())
                 .navigationTitle("Fiches Techniques")
+                .navigationViewStyle(.stack)
         }
         .navigationViewStyle(.stack)
+        .navigationBarHidden(true)
+        .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
     }
 }

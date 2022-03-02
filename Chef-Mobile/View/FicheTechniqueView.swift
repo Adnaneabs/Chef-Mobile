@@ -12,7 +12,7 @@ struct FicheTechniqueView: View {
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var vm : FTViewModel
-    //@ObservedObject var listVm : ListIngredientViewModel
+    @ObservedObject var listVm : ListFicheTechniqueViewModel
     var intent: IntentFicheTechnique
     
     @State var showingAlertBouttonModif : Bool = false
@@ -29,9 +29,9 @@ struct FicheTechniqueView: View {
 
     init(vm: FTViewModel, listVm: ListFicheTechniqueViewModel){
         self.vm = vm
-        //self.listVm = listVm
+        self.listVm = listVm
         self.intent = IntentFicheTechnique()
-        //self.intent.addObserver(viewModel: listVm)
+        self.intent.addObserver(viewModel: listVm)
         self.intent.addObserver(viewModel: vm)
     }
     

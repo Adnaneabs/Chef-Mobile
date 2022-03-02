@@ -23,7 +23,7 @@ struct MainView: View {
                         Label("Settings", systemImage: "gear.circle")
                     }
             }
-        //.navigationViewStyle(.stack)
+        .navigationViewStyle(.stack)
         //.navigationBarBackButtonHidden(true)
     }
 }

@@ -103,10 +103,10 @@ struct ListFicheTechniqueView: View {
             Label("Ajouter", systemImage: "plus")
         })
         .sheet(isPresented: $showingSheet) {
-            Text("Sheet to add an FT")
+            SheetViewAjoutFT(vm: listFichTechniqueVM)
         }
         .actionSheet(isPresented: $presentActionSheet) {
-            ActionSheet(title: Text("Êtes-vous-sûre de vouloir supprimer cette ingrédient ?"),
+            ActionSheet(title: Text("Êtes-vous-sûre de vouloir supprimer cette fiche technique ?"),
                         buttons: [
                             .destructive(Text("Supprimer"),
                                          action: { self.handleSuppressionFT(indexToSupress: indexToSupress)}),

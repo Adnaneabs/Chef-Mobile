@@ -23,14 +23,16 @@ struct ContentView: View {
                 }
                 .padding()
                 .buttonStyle(.bordered)
-            }.padding(.bottom,100)
+            }
+            .padding(.bottom,100)
+            .navigationViewStyle(.stack)
             
         }
-        .navigationViewStyle(.stack)
-//        .padding()
+        //        .padding()
         .onAppear(perform: {
             viewModel.signedIn = viewModel.isSignedIn
         })
+        .navigationViewStyle(.stack)
     }
         
 }

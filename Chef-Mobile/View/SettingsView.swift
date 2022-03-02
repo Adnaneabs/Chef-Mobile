@@ -21,6 +21,8 @@ struct SettingsView: View {
             }.navigationTitle("Settings")
         }
         .navigationViewStyle(.stack)
+        .navigationBarHidden(true)
+        .navigationBarTitle("")
         .navigationBarBackButtonHidden(true)
     }
 }

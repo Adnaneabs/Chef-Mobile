@@ -10,7 +10,7 @@ import Foundation
 class Etape {
     
     private var id : Int
-    private var titre : String
+    var titre : String
     private var description : String
     private var duree : Int
     private var tabIngredients : [Ingredient]

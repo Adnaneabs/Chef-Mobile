@@ -39,14 +39,14 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
                                           nomFiche: doc["NomPlat"] as? String ?? "",
                                           nomAuteur: doc["NomAuteur"] as? String ?? "",
                                           nbCouvert: doc["NbCouvert"] as? Int ?? 0,
-                                          tabEtape: []
+                                          tabEtape: doc["Etape"] as? [Etape] ?? []
                     )
                     
                 }
             }
     }
     func ajoutFicheTechnique(FT: FicheTechnique){
-        firestore.collection("Fiche technique").addDocument(data: ["nomPlat" : FT.nomFiche , "nomAuteur" : FT.nomAuteur ,
+        firestore.collection("Fiche technique").addDocument(data: ["NomPlat" : FT.nomFiche , "NomAuteur" : FT.nomAuteur ,
                                                                    "NbCouvert" : FT.nbCouvert, "Etape" : FT.tabEtape as Any]) {
             error in
             if let error = error {
@@ -68,7 +68,7 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
         
         newFT = self.model[i]
         
-        firestore.collection("Fiche Technique").document(id).setData(
+        firestore.collection("Fiche technique").document(id).setData(
             ["NomPlat" : newFT.nomFiche, "NomAuteur" : newFT.nomAuteur, "NbCouvert" : newFT.nbCouvert
              , "Etape" : newFT.tabEtape as Any], merge:true) {
                  error in
@@ -83,7 +83,7 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
             model[$0]
         }.forEach {
             ft in let ftId = ft.id
-            let docRef = firestore.collection("Fiche Technique").document(ftId)
+            let docRef = firestore.collection("Fiche technique").document(ftId)
             docRef.delete() { error in
                 if let error = error{
                     print(error.localizedDescription)

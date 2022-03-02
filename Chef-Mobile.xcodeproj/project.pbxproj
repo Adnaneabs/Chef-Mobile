@@ -32,6 +32,7 @@
 		D01B373C27CE90E000BD26EE /* FicheTechniqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */; };
 		D01B374027CE9E6900BD26EE /* ListFicheTechniqueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */; };
 		D01B374227CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B374127CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift */; };
+		D01B374427CF92E400BD26EE /* SheetViewAjoutFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01B374327CF92E400BD26EE /* SheetViewAjoutFT.swift */; };
 		D0C2C34C27BACBD10093EDDB /* Chef_MobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */; };
 		D0C2C34E27BACBD10093EDDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C2C34D27BACBD10093EDDB /* ContentView.swift */; };
 		D0C2C35027BACBD20093EDDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D0C2C34F27BACBD20093EDDB /* Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueView.swift; sourceTree = "<group>"; };
 		D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFicheTechniqueView.swift; sourceTree = "<group>"; };
 		D01B374127CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFicheTechniqueViewModel.swift; sourceTree = "<group>"; };
+		D01B374327CF92E400BD26EE /* SheetViewAjoutFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewAjoutFT.swift; sourceTree = "<group>"; };
 		D0C2C34827BACBD10093EDDB /* Chef-Mobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chef-Mobile.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C2C34B27BACBD10093EDDB /* Chef_MobileApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chef_MobileApp.swift; sourceTree = "<group>"; };
 		D0C2C34D27BACBD10093EDDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				D01B373527CE526C00BD26EE /* SettingsView.swift */,
 				D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */,
 				D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */,
+				D01B374327CF92E400BD26EE /* SheetViewAjoutFT.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 			files = (
 				D01B373A27CE83E900BD26EE /* IntentFicheTechnique.swift in Sources */,
 				D01B374227CE9E9400BD26EE /* ListFicheTechniqueViewModel.swift in Sources */,
+				D01B374427CF92E400BD26EE /* SheetViewAjoutFT.swift in Sources */,
 				D01B374027CE9E6900BD26EE /* ListFicheTechniqueView.swift in Sources */,
 				D01B373827CE7B9800BD26EE /* FicheTechniqueViewModel.swift in Sources */,
 				0C77883227C7F7A5009A097F /* SheetViewAjoutIngredient.swift in Sources */,
