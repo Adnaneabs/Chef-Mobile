@@ -96,6 +96,7 @@ struct FicheTechniqueView: View {
                 .padding(.horizontal, 50)
             }
         }
+        .navigationTitle("\(vm.nomFiche)")
         .onChange(of: vm.error){ error in
             switch error {
             case .noError:

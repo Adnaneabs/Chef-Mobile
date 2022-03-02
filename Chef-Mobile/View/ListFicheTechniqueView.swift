@@ -47,19 +47,20 @@ struct ListFicheTechniqueView: View {
                             Circle()
                                 .fill(
                                 LinearGradient(
-                                    gradient: Gradient(colors: [.red, .pink]),
+                                    gradient: Gradient(colors: [.red, .white]),
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                     )
                                 )
                             VStack {
-                                Text("\(FT.nbCouvert)")
+                                Image("LogoRmBg")
+                                /*Text("\(FT.nbCouvert)")
                                 .font(.system(size: 20, weight: .bold))
                                 .foregroundColor(.white)
                                                     
                                 Text("couverts")
                                     .font(.caption)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(.white)*/
                                 }
                         }
                         .frame(width: 70, height: 70, alignment: .center)
@@ -77,7 +78,14 @@ struct ListFicheTechniqueView: View {
                                 .font(.system(size: 12.0, weight: .regular))
                                 .lineLimit(2)
                                 .foregroundColor(.white)
-                                .background(Color.green)
+                                .background(Color( red: 200/255, green: 100/255, blue: 100/255))
+                                .cornerRadius(5)
+                            Text("\(FT.nbCouvert) couverts")
+                                .padding(5)
+                                .font(.system(size: 12.0, weight: .regular))
+                                .lineLimit(2)
+                                .foregroundColor(.white)
+                                .background(Color( red: 248/255, green: 142/255, blue: 90/255))
                                 .cornerRadius(5)
                         }
                     
