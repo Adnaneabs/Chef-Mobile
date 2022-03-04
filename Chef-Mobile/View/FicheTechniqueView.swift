@@ -73,6 +73,26 @@ struct FicheTechniqueView: View {
                 .cornerRadius(5.0)
         }
         .padding()
+            
+            VStack(alignment: .leading){
+                Text("étpaes nécessaires :")
+                    .font(.headline)
+                List{
+                    ForEach(vm.tabEtape, id: \.id){
+                        etape in
+                        VStack(alignment: .leading){
+                                Text(etape.titre)
+                                Text(etape.description)
+                                Text("\(etape.duree)")
+                                Text(etape.printTabIngredients())
+                            }
+                        }
+                    }
+                
+                
+            }
+            .padding()
+            
             HStack{
                 Button(action:{
                     if(vm.isPossibleToSendFT()){

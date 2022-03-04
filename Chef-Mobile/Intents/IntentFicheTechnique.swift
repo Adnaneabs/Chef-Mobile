@@ -13,7 +13,12 @@ enum IntentStateFicheTechnique{
     case nomFicheChanging(String)
     case nomAuteurChanging(String)
     case nbCouvertChanging(Int)
-    case tabEtapeChanging([Etape])
+    
+    case tabReferenceEtapeChanging([String])
+    
+    case ajoutEtape(Etape)
+    
+    case tabEtapeChanging(Etape)
     case ficheTechniqueChanging(String)
     case ajoutFT(FicheTechnique)
     case supprimerFT(IndexSet)
@@ -45,8 +50,13 @@ struct IntentFicheTechnique {
         self.state.send(.updatingList)
     }
     
-    func intentToChange(tabEtape: [Etape]){
-        self.state.send(.tabEtapeChanging(tabEtape))
+    func intentToChange(tabReferenceEtape: [String]){
+        self.state.send(.tabReferenceEtapeChanging(tabReferenceEtape))
+        self.state.send(.updatingList)
+    }
+    
+    func intentToChange(etapeAjout: Etape){
+        self.state.send(.tabEtapeChanging(etapeAjout))
         self.state.send(.updatingList)
     }
     
@@ -62,6 +72,11 @@ struct IntentFicheTechnique {
     
     func intentToChange(indexSet: IndexSet){
         self.state.send(.supprimerFT(indexSet))
+        self.state.send(.updatingList)
+    }
+    
+    func intentToChange(etape: Etape){
+        self.state.send(.ajoutEtape(etape))
         self.state.send(.updatingList)
     }
 }
