@@ -75,7 +75,7 @@ struct FicheTechniqueView: View {
         .padding()
             
             VStack(alignment: .leading){
-                Text("étpaes nécessaires :")
+                Text("étapes nécessaires :")
                     .font(.headline)
                 List{
                     ForEach(vm.tabEtape, id: \.id){

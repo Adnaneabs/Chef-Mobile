@@ -49,7 +49,6 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
                                           tabEtape: self.convertReferencesToEtapes(tabReference: doc["tabEtape"] as? [String] ?? [])
                     )
                 }
-                print(self.model[0].tabEtape)
             }
     }
     
@@ -62,7 +61,7 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
                 
                 self.tabEtape = documents.map{
                     (doc) -> Etape in
-                    return Etape(id: doc.documentID,
+                    return Etape(id: doc["id"] as? String ?? "",
                                  titre: doc["titre"] as? String ?? "",
                                  description: doc["description"] as? String ?? "",
                                  duree: doc["duree"] as? Int ?? 0,
@@ -70,7 +69,6 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
                     )
                     
                 }
-                print(self.tabEtape[0].titre)
             }
     }
     
@@ -84,7 +82,6 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
             }
             i = i + 1
         }
-        print(indice)
         return indice
     }
     
@@ -93,14 +90,12 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
         var i = 0
         var tabEtape : [Etape] = []
         while(i<tabReference.count){
-            print(tabReference[i])
             let indice = self.verifReference(idEtape: tabReference[i])
             if( indice != -1 ){
                 tabEtape.append(self.tabEtape[indice])
             }
             i = i + 1
         }
-        print("tabetape : \(tabEtape)")
         return tabEtape
     }
     
@@ -162,11 +157,25 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
     }
     
     func ajoutEtape(etape : Etape){
-        firestore.collection("etape").addDocument(data: ["titre" : etape.titre , "description" : etape.description ,
+        firestore.collection("etape").addDocument(data: ["id": etape.id , "titre" : etape.titre , "description" : etape.description ,
                                                          "duree" : etape.duree , "tabIngredients" : etape.tabIngredients]) {
             error in
             if let error = error {
                 print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func supprimerEtape(indexSet : IndexSet){
+        indexSet.map{
+            tabEtape[$0]
+        }.forEach {
+            etape in let etapeId = etape.id
+            let docRef = firestore.collection("etape").document(etapeId)
+            docRef.delete() { error in
+                if let error = error{
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -185,6 +194,8 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
             self.supprimerFichTechnique(indexSet: indexSet)
         case .ajoutEtape(let tab):
             self.ajoutEtape(etape: tab)
+        case .supprimmerEtape(let indexSet):
+            self.supprimerEtape(indexSet: indexSet)
         default:
             break
         }

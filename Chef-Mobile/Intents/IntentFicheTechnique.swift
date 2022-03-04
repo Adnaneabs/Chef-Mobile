@@ -18,6 +18,7 @@ enum IntentStateFicheTechnique{
     
     case ajoutEtape(Etape)
     
+    case supprimmerEtape(IndexSet)
     case tabEtapeChanging(Etape)
     case ficheTechniqueChanging(String)
     case ajoutFT(FicheTechnique)
@@ -77,6 +78,11 @@ struct IntentFicheTechnique {
     
     func intentToChange(etape: Etape){
         self.state.send(.ajoutEtape(etape))
+        self.state.send(.updatingList)
+    }
+    
+    func intentToChange(indexSetEtape: IndexSet){
+        self.state.send(.supprimmerEtape(indexSetEtape))
         self.state.send(.updatingList)
     }
 }
