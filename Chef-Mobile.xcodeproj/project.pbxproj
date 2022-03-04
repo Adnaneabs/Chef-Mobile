@@ -11,6 +11,7 @@
 		0C0DC77827C4DF1900200640 /* IntentIngredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DC77727C4DF1900200640 /* IntentIngredient.swift */; };
 		0C0DC77A27C4E12A00200640 /* ListIngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DC77927C4E12A00200640 /* ListIngredientViewModel.swift */; };
 		0C0DC77C27C4E16600200640 /* IngredientList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0DC77B27C4E16600200640 /* IngredientList.swift */; };
+		0C5BCA9427D2466400B05593 /* SheetViewAjoutEtape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5BCA9327D2466400B05593 /* SheetViewAjoutEtape.swift */; };
 		0C66593627C5068F00E2B275 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 0C66593527C5068F00E2B275 /* FirebaseAuth */; };
 		0C66593827C5068F00E2B275 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 0C66593727C5068F00E2B275 /* FirebaseFirestore */; };
 		0C66593A27C5068F00E2B275 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 0C66593927C5068F00E2B275 /* FirebaseFirestoreSwift-Beta */; };
@@ -64,6 +65,7 @@
 		0C0DC77727C4DF1900200640 /* IntentIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntentIngredient.swift; sourceTree = "<group>"; };
 		0C0DC77927C4E12A00200640 /* ListIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientViewModel.swift; sourceTree = "<group>"; };
 		0C0DC77B27C4E16600200640 /* IngredientList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientList.swift; sourceTree = "<group>"; };
+		0C5BCA9327D2466400B05593 /* SheetViewAjoutEtape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewAjoutEtape.swift; sourceTree = "<group>"; };
 		0C66593D27C509E700E2B275 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0C77883127C7F7A5009A097F /* SheetViewAjoutIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewAjoutIngredient.swift; sourceTree = "<group>"; };
 		0CF37C6A27C38E9A006FA69C /* CategorieIngredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieIngredient.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				D01B373B27CE90E000BD26EE /* FicheTechniqueView.swift */,
 				D01B373F27CE9E6900BD26EE /* ListFicheTechniqueView.swift */,
 				D01B374327CF92E400BD26EE /* SheetViewAjoutFT.swift */,
+				0C5BCA9327D2466400B05593 /* SheetViewAjoutEtape.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				0CF37C7327C3910E006FA69C /* FicheTechnique.swift in Sources */,
 				0CF37C7127C3906E006FA69C /* Etape.swift in Sources */,
 				0C0DC77C27C4E16600200640 /* IngredientList.swift in Sources */,
+				0C5BCA9427D2466400B05593 /* SheetViewAjoutEtape.swift in Sources */,
 				D01B373227CE465600BD26EE /* MainView.swift in Sources */,
 				0CF37C7627C39241006FA69C /* ListIngredientView.swift in Sources */,
 				0CF37C6B27C38E9A006FA69C /* CategorieIngredient.swift in Sources */,

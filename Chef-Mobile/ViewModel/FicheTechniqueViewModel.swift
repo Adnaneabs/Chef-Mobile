@@ -37,6 +37,8 @@ class FTViewModel : ObservableObject, FicheTechniqueObserver , Subscriber {
     @Published var nbCouvert : Int
     @Published var tabEtape : [Etape]
     
+    var tabReferenceEtape : [String]
+    
     @Published var error : FTViewModelError = .noError
     
     func receive(subscription: Subscription) {
@@ -67,12 +69,8 @@ class FTViewModel : ObservableObject, FicheTechniqueObserver , Subscriber {
             } else {
                 self.FTModel.nbCouvert = nbCouvert
             }
-        case .tabEtapeChanging(let tabEtape):
-            if(self.tabEtape.isEmpty){
-                self.error = .tabEtapeError
-            } else {
-                self.FTModel.tabEtape = tabEtape
-            }
+        case .tabEtapeChanging(let etape):
+            self.tabEtape.append(etape)
         default:
             break
         }
@@ -98,6 +96,10 @@ class FTViewModel : ObservableObject, FicheTechniqueObserver , Subscriber {
         self.nbCouvert = nbCouvert
     }
     
+    func changed(tabReferenceEtape: [String]) {
+        self.tabReferenceEtape = tabReferenceEtape
+    }
+    
     func changed(tabEtape: [Etape]) {
         self.tabEtape = tabEtape
     }
@@ -119,7 +121,10 @@ class FTViewModel : ObservableObject, FicheTechniqueObserver , Subscriber {
         self.FTModel = ficheTechnique
         self.nomFiche = ficheTechnique.nomFiche
         self.nbCouvert = ficheTechnique.nbCouvert
-        self.tabEtape = ficheTechnique.tabEtape ?? []
+        
+        self.tabReferenceEtape = ficheTechnique.tabReferenceEtape
+        
+        self.tabEtape = ficheTechnique.tabEtape
         self.nomAuteur = ficheTechnique.nomAuteur
         self.FTModel.observer = self
     }

@@ -16,10 +16,12 @@ struct SheetViewAjoutFT : View {
     
     @State var errorMessageEnvoi = "La Fiche Technique ne peut pas être ajouté car certains champs ne sont pas remplis."
     
+    @State var showingSheetAjoutEtape = false
+    
     @State var errorMessageChamp = ""
     @State var showingAlertChamp : Bool = false
     
-    @ObservedObject var ficheTechniqueVM : FTViewModel = FTViewModel(ficheTechnique: FicheTechnique(id: "", nomFiche: "", nomAuteur: "", nbCouvert: 0, tabEtape: []))
+    @ObservedObject var ficheTechniqueVM : FTViewModel = FTViewModel(ficheTechnique: FicheTechnique(id: "", nomFiche: "", nomAuteur: "", nbCouvert: 0, tabReferenceEtape: [] ,tabEtape: []))
     
     @ObservedObject var listFicheTechniqueVM : ListFicheTechniqueViewModel
     
@@ -84,12 +86,52 @@ struct SheetViewAjoutFT : View {
                     .cornerRadius(5.0)
             }
             .padding()
+        
+        VStack{
+            Button(action: {
+                showingSheetAjoutEtape.toggle()
+            }) {
+                HStack {
+                    Spacer()
+                    Text("Ajouter une étape")
+                    .font(.headline)
+                    .foregroundColor(Color.white)
+                    Spacer()
+                }
+            }
+            .padding(.vertical, 10.0)
+            .background(Color.red)
+            .cornerRadius(4.0)
+            .padding(.horizontal, 50)
+        }
+        
+        VStack(alignment: .leading){
+            Text("étapes à ajoutées :")
+                .font(.headline)
+            List{
+                ForEach(ficheTechniqueVM.tabEtape, id: \.id){
+                    etape in
+                    VStack(alignment: .leading){
+                            Text(etape.titre)
+                        }
+                    }
+                }
+            
+            
+        }
+        .padding()
+        
+        .sheet(isPresented: $showingSheetAjoutEtape){
+            SheetViewAjoutEtape(vm: listFicheTechniqueVM, FTvm: ficheTechniqueVM)
+        }
+        
         HStack{
             Button(action: {
                 if(ficheTechniqueVM.isPossibleToSendFT()){
-                    intentFicheTechnique.intentToChange(ficheTechnique: FicheTechnique(id: UUID().uuidString, nomFiche: ficheTechniqueVM.nomFiche, nomAuteur: ficheTechniqueVM.nomAuteur, nbCouvert: ficheTechniqueVM.nbCouvert, tabEtape: []))
+                    intentFicheTechnique.intentToChange(ficheTechnique: FicheTechnique(id: UUID().uuidString, nomFiche: ficheTechniqueVM.nomFiche, nomAuteur: ficheTechniqueVM.nomAuteur, nbCouvert: ficheTechniqueVM.nbCouvert, tabReferenceEtape: [], tabEtape: []))
                     dismiss()
                 } else {
+                    print(self.ficheTechniqueVM.tabEtape)
                     self.showingAlert = true
                 }
             }) {
