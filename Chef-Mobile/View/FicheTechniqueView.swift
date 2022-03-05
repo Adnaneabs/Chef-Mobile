@@ -83,7 +83,7 @@ struct FicheTechniqueView: View {
                         VStack(alignment: .leading){
                                 Text(etape.titre)
                                 Text(etape.description)
-                                Text("\(etape.duree)")
+                                Text("\(etape.duree) min")
                                 Text(etape.printTabIngredients())
                             }
                         }

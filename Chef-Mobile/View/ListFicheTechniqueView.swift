@@ -28,12 +28,22 @@ struct ListFicheTechniqueView: View {
     
     @ObservedObject var listFichTechniqueVM : ListFicheTechniqueViewModel
     
+    //Pour les ingrédients
+    @ObservedObject var listIngredientVM : ListIngredientViewModel
+    
+    var intentIngredient: IntentIngredient
+    ///
+    
     var intentFT: IntentFicheTechnique
     
-    init(vm: ListFicheTechniqueViewModel){
+    init(vm: ListFicheTechniqueViewModel, vmI : ListIngredientViewModel){
         self.listFichTechniqueVM = vm
+        self.listIngredientVM = vmI
         self.intentFT = IntentFicheTechnique()
         self.intentFT.addObserver(viewModel: vm)
+        self.intentIngredient = IntentIngredient()
+        self.intentIngredient.addObserver(viewModel: vmI)
+        
     }
     
     var body: some View {
@@ -111,7 +121,7 @@ struct ListFicheTechniqueView: View {
             Label("Ajouter", systemImage: "plus")
         })
         .sheet(isPresented: $showingSheet) {
-            SheetViewAjoutFT(vm: listFichTechniqueVM)
+            SheetViewAjoutFT(vm: listFichTechniqueVM, vmI: listIngredientVM)
         }
         .actionSheet(isPresented: $presentActionSheet) {
             ActionSheet(title: Text("Êtes-vous-sûre de vouloir supprimer cette fiche technique ?"),
@@ -129,6 +139,6 @@ struct ListFicheTechniqueView: View {
 
 struct ListFicheTechniqueView_Previews: PreviewProvider {
     static var previews: some View {
-        ListFicheTechniqueView(vm: ListFicheTechniqueViewModel())
+        ListFicheTechniqueView(vm: ListFicheTechniqueViewModel(), vmI: ListIngredientViewModel())
     }
 }

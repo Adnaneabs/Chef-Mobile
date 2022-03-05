@@ -19,7 +19,7 @@ struct ListIngredientView: View {
     //Pour la searchBar
     @State private var searchString = ""
     
-    var searchIngredient : [Ingredient] {
+    public var searchIngredient : [Ingredient] {
         if searchString.isEmpty {
             return listIngredientVM.model
         } else {
