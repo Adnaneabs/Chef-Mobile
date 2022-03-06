@@ -107,6 +107,11 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
                 print(error.localizedDescription)
             }
         }
+        
+        //Ajout des étapes également à ce moment
+        for i in 0..<FT.tabEtape.count {
+            self.ajoutEtape(etape: FT.tabEtape[i])
+        }
     }
     
     func updateFicheTechnique(id: String){
@@ -171,11 +176,21 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
             tabEtape[$0]
         }.forEach {
             etape in let etapeId = etape.id
-            let docRef = firestore.collection("etape").document(etapeId)
-            docRef.delete() { error in
-                if let error = error{
-                    print(error.localizedDescription)
-                }
+            let docs = firestore.collection("etape").whereField("id", isEqualTo: "\(etapeId)").getDocuments {
+                (snapshot, err) in
+                if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        for document in snapshot!.documents {
+                            let docRef = self.firestore.collection("etape").document(document.documentID)
+                            print(document.documentID)
+                            docRef.delete() { error in
+                                if let error = error{
+                                    print(error.localizedDescription)
+                                }
+                            }
+                        }
+                    }
             }
         }
     }

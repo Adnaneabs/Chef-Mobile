@@ -37,7 +37,7 @@ class FTViewModel : ObservableObject, FicheTechniqueObserver , Subscriber {
     @Published var nbCouvert : Int
     @Published var tabEtape : [Etape]
     
-    var tabReferenceEtape : [String]
+    @Published var tabReferenceEtape : [String]
     
     @Published var error : FTViewModelError = .noError
     
@@ -125,6 +125,7 @@ class FTViewModel : ObservableObject, FicheTechniqueObserver , Subscriber {
         self.tabReferenceEtape = ficheTechnique.tabReferenceEtape
         
         self.tabEtape = ficheTechnique.tabEtape
+
         self.nomAuteur = ficheTechnique.nomAuteur
         self.FTModel.observer = self
     }

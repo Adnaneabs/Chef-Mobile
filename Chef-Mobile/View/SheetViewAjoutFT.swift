@@ -29,8 +29,6 @@ struct SheetViewAjoutFT : View {
     
     @State var errorMessageEnvoi = "La Fiche Technique ne peut pas être ajouté car certains champs ne sont pas remplis."
     
-    @State var showingSheetAjoutEtape = false
-    
     @State var errorMessageChamp = ""
     @State var showingAlertChamp : Bool = false
     
@@ -121,6 +119,8 @@ struct SheetViewAjoutFT : View {
                 }
             }
             .padding()
+
+            
             VStack(alignment:.leading){
                 //Text("Veuillez commencer par saisir les etapes de votre fihe technique")
                 Text("Les étapes")
@@ -214,27 +214,26 @@ struct SheetViewAjoutFT : View {
                         }
                         
                     }
-                    HStack{
-                        Button(action: {
-                            self.etape.id = UUID().uuidString
-                            intentFicheTechnique.intentToChange(etape: self.etape)
-                            self.tabEtape.append(self.etape)
-                            self.tabReferenceEtape.append(self.etape.id)
-                            self.etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [])
-                        }) {
-                            HStack {
-                                Spacer()
-                                Text("Ajouter cette étape")
-                                    .font(.headline)
-                                    .foregroundColor(Color.white)
-                                Spacer()
-                            }
-                        }
-                        .padding(.vertical, 10.0)
-                        .background(Color.black)
-                        .cornerRadius(4.0)
-                        .padding(.horizontal, 50)
-                    }
+          
+
+                    
+                }
+                
+                
+                HStack{
+                    Button(action: {
+                        self.etape.id = UUID().uuidString
+                        self.tabEtape.append(self.etape)
+                        self.tabReferenceEtape.append(self.etape.id)
+                        self.etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [])
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Ajouter cette étape")
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                            Spacer()
+
                     .padding()
                     VStack(alignment: .leading){
                         Text("étapes à ajoutées :")
@@ -254,6 +253,7 @@ struct SheetViewAjoutFT : View {
                                 }
                             }
                             .frame(minHeight: minRowHeight * 3).border(Color.red)
+
                         }
                         
                     }
@@ -287,10 +287,6 @@ struct SheetViewAjoutFT : View {
             
             
             
-            
-            .sheet(isPresented: $showingSheetAjoutEtape){
-                SheetViewAjoutEtape(vm: listFicheTechniqueVM, FTvm: ficheTechniqueVM)
-            }
             
             HStack{
                 Button(action: {
@@ -360,6 +356,17 @@ struct SheetViewAjoutFT : View {
     }
     
     func handleSuppressionEtape(indexToSupress: IndexSet) {
-        intentFicheTechnique.intentToChange(indexSetEtape: indexToSupress)
+        indexToSupress.map{
+            self.tabEtape[$0]
+        }.forEach {
+            etape in let etapeId = etape.id
+            print(etapeId)
+            for i in 0..<self.tabReferenceEtape.count {
+                if( self.tabReferenceEtape[i] == etapeId){
+                    self.tabReferenceEtape.remove(at: i)
+                }
+            }
+        }
+        self.tabEtape.remove(atOffsets: indexToSupress)
     }
 }
