@@ -193,6 +193,8 @@ struct SheetViewAjoutFT : View {
                         .padding(.all)
                         .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
                         .cornerRadius(5.0)
+                }
+                .padding()
                     VStack(alignment: .leading){
                         Text("Ingrédients de l'étape :")
                             .font(.headline)
@@ -213,79 +215,52 @@ struct SheetViewAjoutFT : View {
                         }
                         
                     }
-          
-
-                    
-                }
-                
-                
-                HStack{
-                    Button(action: {
-                        self.etape.id = UUID().uuidString
-                        self.tabEtape.append(self.etape)
-                        self.tabReferenceEtape.append(self.etape.id)
-                        self.etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [])
-                    }) {
-                        HStack {
-                            Spacer()
-                            Text("Ajouter cette étape")
-                                .font(.headline)
-                                .foregroundColor(Color.white)
-                            Spacer()
-
                     .padding()
+          
                     VStack(alignment: .leading){
-                        Text("étapes à ajoutées :")
-                            .font(.headline)
-                        ScrollView{
-                            List{
-                                ForEach(self.tabEtape, id: \.id){
-                                    etape in
-                                    VStack(alignment: .leading){
-                                        Text(etape.titre)
+                        Button(action: {
+                            self.etape.id = UUID().uuidString
+                            self.tabEtape.append(self.etape)
+                            self.tabReferenceEtape.append(self.etape.id)
+                            self.etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [])
+                        }) {
+                            HStack {
+                                Spacer()
+                                Text("Ajouter cette étape")
+                                    .font(.headline)
+                                    .foregroundColor(Color.red)
+                                Spacer()
+                            }
+                        }
+                    }
+                        .padding()
+                
+                        VStack(alignment: .leading){
+                            Text("étapes à ajoutées :")
+                                .font(.headline)
+                            ScrollView{
+                                List{
+                                    ForEach(self.tabEtape, id: \.id){
+                                        etape in
+                                        VStack(alignment: .leading){
+                                            Text(etape.titre)
+                                        }
+                                    }
+                                    .onDelete{
+                                        (indexSet) in
+                                        self.indexToSupress = indexSet
+                                        self.presentActionSheetDeleteEtape.toggle()
                                     }
                                 }
-                                .onDelete{
-                                    (indexSet) in
-                                    self.indexToSupress = indexSet
-                                    self.presentActionSheetDeleteEtape.toggle()
-                                }
-                            }
-                            .frame(minHeight: minRowHeight * 3).border(Color.red)
+                                .frame(minHeight: minRowHeight * 3).border(Color.red)
 
+                            }
+                            
                         }
-                        
+                        .padding()
                     }
-                    //.padding()
-                }
-                .padding()
-            
-            }
-            //.background(Color(red : 232/255, green : 211/255, blue : 185/255))
-            //.background(.brown)
-            
-            //        VStack{
-            //            Button(action: {
-            //                showingSheetAjoutEtape.toggle()
-            //            }) {
-            //                HStack {
-            //                    Spacer()
-            //                    Text("Ajouter une étape")
-            //                    .font(.headline)
-            //                    .foregroundColor(Color.white)
-            //                    Spacer()
-            //                }
-            //            }
-            //            .padding(.vertical, 10.0)
-            //            .background(Color.red)
-            //            .cornerRadius(4.0)
-            //            .padding(.horizontal, 50)
-            //        }
-            
-            
-            
-            
-            
+                    .padding()
+                    
             HStack{
                 Button(action: {
                     if(ficheTechniqueVM.isPossibleToSendFT()){
@@ -349,10 +324,11 @@ struct SheetViewAjoutFT : View {
                                              action: { self.handleSuppressionEtape(indexToSupress: indexToSupress)}),
                                 .cancel()])
             }
-        }
+        
+        
         //.background(Color(red : 232/255, green : 211/255, blue : 185/255))
     }
-        }}
+        }
         
     
     func handleSuppressionEtape(indexToSupress: IndexSet) {
