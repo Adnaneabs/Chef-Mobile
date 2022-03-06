@@ -35,14 +35,23 @@ struct SheetViewAjoutFT : View {
     @ObservedObject var ficheTechniqueVM : FTViewModel = FTViewModel(ficheTechnique: FicheTechnique(id: "", nomFiche: "", nomAuteur: "", nbCouvert: 0, tabReferenceEtape: [] ,tabEtape: []))
     
     @ObservedObject var listFicheTechniqueVM : ListFicheTechniqueViewModel
+    //Pour les ingrédients
+    @ObservedObject var listIngredientVM : ListIngredientViewModel
+    
+    var intentIngredient: IntentIngredient
+    ///
     
     var intentFicheTechnique: IntentFicheTechnique
     
-    init(vm: ListFicheTechniqueViewModel){
+    init(vm: ListFicheTechniqueViewModel, vmI : ListIngredientViewModel){
         self.listFicheTechniqueVM = vm
+        self.listIngredientVM = vmI
         self.intentFicheTechnique = IntentFicheTechnique()
+        self.intentIngredient = IntentIngredient()
         self.intentFicheTechnique.addObserver(viewModel: listFicheTechniqueVM)
         self.intentFicheTechnique.addObserver(viewModel: ficheTechniqueVM)
+        self.intentIngredient.addObserver(viewModel: vmI)
+        
     }
     
     let formatter: NumberFormatter = {
@@ -51,14 +60,27 @@ struct SheetViewAjoutFT : View {
         return formatter
     }()
     
+    @State private var searchString = ""
+    
+    var searchIngredient : [Ingredient] {
+        if searchString.isEmpty {
+            return listIngredientVM.model
+        } else {
+            return listIngredientVM.searchIngredientByName(nom: searchString)
+        }
+    }
+    
+    //var allIngs : [String] = []
+    
+    
     var body: some View {
         ScrollView{
             VStack(alignment:.leading){
-                Text("Ajouter une Fiche Technique")
+                Text("Votre Fiche Technique")
                     .font(.title)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.all)
+                Spacer()
                 
                 VStack(alignment: .leading){
                     Text("Nom du Plat : ")
@@ -84,23 +106,24 @@ struct SheetViewAjoutFT : View {
                         .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
                         .cornerRadius(5.0)
                 }
+                VStack(alignment: .leading){
+                    Text("Nombre de couverts : ")
+                        .font(.headline)
+                    TextField("Nombre de couverts", value: $ficheTechniqueVM.nbCouvert, formatter: formatter)
+                        .onSubmit {
+                            intentFicheTechnique.intentToChange(nbCouvert: ficheTechniqueVM.nbCouvert)
+                        }
+                        .padding(.all)
+                        .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                        .cornerRadius(5.0)
+                }
             }
             .padding()
-            VStack(alignment: .leading){
-                Text("Nombre de couverts : ")
-                    .font(.headline)
-                TextField("Nombre de couverts", value: $ficheTechniqueVM.nbCouvert, formatter: formatter)
-                    .onSubmit {
-                        intentFicheTechnique.intentToChange(nbCouvert: ficheTechniqueVM.nbCouvert)
-                    }
-                    .padding(.all)
-                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-                    .cornerRadius(5.0)
-            }
-            .padding()
+
             
             VStack(alignment:.leading){
-                Text("Ajouter une étape")
+                //Text("Veuillez commencer par saisir les etapes de votre fihe technique")
+                Text("Les étapes")
                     .font(.title)
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -114,7 +137,7 @@ struct SheetViewAjoutFT : View {
                         .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
                         .cornerRadius(5.0)
                 }
-                
+                .padding()
                 VStack(alignment: .leading){
                     Text("Description de l'étape : ")
                         .font(.headline)
@@ -123,7 +146,7 @@ struct SheetViewAjoutFT : View {
                         .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
                         .cornerRadius(5.0)
                 }
-                
+                .padding()
                 VStack(alignment: .leading){
                     Text("Durée de l'étape : ")
                         .font(.headline)
@@ -132,38 +155,67 @@ struct SheetViewAjoutFT : View {
                         .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
                         .cornerRadius(5.0)
                 }
-                
+                .padding()
                 VStack(alignment: .leading){
-                    Text("Ingrédients de l'étape : ")
+                    Text("Ajouter un ingrédient : ")
                         .font(.headline)
-                    TextField("ingrédient", text: $nomIngredient)
-                        .onSubmit {
+                    HStack{
+                        Picker( "Ingrédient", selection: $nomIngredient){
+                            ForEach(searchIngredient, id : \.nom){
+                                Text($0.nom)
+                            }
+                        }
+                        .padding()
+                        .background(Color(red : 220/255, green : 220/255, blue : 220/255))
+                        .foregroundColor(.white)
+                        .cornerRadius(5.0)
+                        .pickerStyle(.menu)
+                        Button(action: {
+                            print("nom de l'ing \(nomIngredient)")
                             self.etape.tabIngredients.append(nomIngredient)
                             self.nomIngredient = ""
+                            print(self.etape.tabIngredients)
+                        }){
+                            Label("Ajouter l'ingrédient", systemImage: "plus")
                         }
+                        .padding()
+                        .foregroundColor(.white)
+                        .background(.gray)
+                        .cornerRadius(5.0)
+                    }
+                    
+                    TextField("ingrédient", text: $nomIngredient)
+                    /*.onSubmit {
+                     print("nom de l'ing \(nomIngredient)")
+                     self.etape.tabIngredients.append(nomIngredient)
+                     self.nomIngredient = ""
+                     print(self.etape.tabIngredients)
+                     }*/
                         .padding(.all)
                         .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
                         .cornerRadius(5.0)
-                }
-                
-                VStack(alignment: .leading){
-                    Text("Ingrédients :")
-                        .font(.headline)
-                    ScrollView{
-                        List{
-                            ForEach(self.etape.tabIngredients, id: \.self){
-                                nom in
-                                VStack(alignment: .leading){
-                                    Text(nom)
+                    VStack(alignment: .leading){
+                        Text("Ingrédients de l'étape :")
+                            .font(.headline)
+                        ScrollView{
+                            List{
+                                ForEach(self.etape.tabIngredients, id :\.self){
+                                    nom in
+                                    VStack(alignment: .leading){
+                                        Text("nom de l'ingrédient : \(nom)")
+                                    }
+                                }
+                                .onDelete{
+                                    (indexSet) in
+                                    self.etape.tabIngredients.remove(atOffsets: indexSet)
                                 }
                             }
-                            .onDelete{
-                                (indexSet) in
-                                self.etape.tabIngredients.remove(atOffsets: indexSet)
-                            }
+                            .frame(minHeight: minRowHeight * 3).border(Color.red)
                         }
-                        .frame(minHeight: minRowHeight * 3).border(Color.red)
+                        
                     }
+          
+
                     
                 }
                 
@@ -181,40 +233,59 @@ struct SheetViewAjoutFT : View {
                                 .font(.headline)
                                 .foregroundColor(Color.white)
                             Spacer()
+
+                    .padding()
+                    VStack(alignment: .leading){
+                        Text("étapes à ajoutées :")
+                            .font(.headline)
+                        ScrollView{
+                            List{
+                                ForEach(self.tabEtape, id: \.id){
+                                    etape in
+                                    VStack(alignment: .leading){
+                                        Text(etape.titre)
+                                    }
+                                }
+                                .onDelete{
+                                    (indexSet) in
+                                    self.indexToSupress = indexSet
+                                    self.presentActionSheetDeleteEtape.toggle()
+                                }
+                            }
+                            .frame(minHeight: minRowHeight * 3).border(Color.red)
+
                         }
+                        
                     }
-                    .padding(.vertical, 10.0)
-                    .background(Color.red)
-                    .cornerRadius(4.0)
-                    .padding(.horizontal, 50)
+                    //.padding()
                 }
                 .padding()
+            
                 
             }
+            //.background(Color(red : 232/255, green : 211/255, blue : 185/255))
+            //.background(.brown)
+            
+            //        VStack{
+            //            Button(action: {
+            //                showingSheetAjoutEtape.toggle()
+            //            }) {
+            //                HStack {
+            //                    Spacer()
+            //                    Text("Ajouter une étape")
+            //                    .font(.headline)
+            //                    .foregroundColor(Color.white)
+            //                    Spacer()
+            //                }
+            //            }
+            //            .padding(.vertical, 10.0)
+            //            .background(Color.red)
+            //            .cornerRadius(4.0)
+            //            .padding(.horizontal, 50)
+            //        }
             
             
-            VStack(alignment: .leading){
-                Text("étapes à ajoutées :")
-                    .font(.headline)
-                ScrollView{
-                    List{
-                        ForEach(self.tabEtape, id: \.id){
-                            etape in
-                            VStack(alignment: .leading){
-                                Text(etape.titre)
-                            }
-                        }
-                        .onDelete{
-                            (indexSet) in
-                            self.indexToSupress = indexSet
-                            self.presentActionSheetDeleteEtape.toggle()
-                        }
-                    }
-                    .frame(minHeight: minRowHeight * 3).border(Color.red)
-                }
-                
-            }
-            .padding()
+            
             
             
             HStack{
@@ -229,18 +300,19 @@ struct SheetViewAjoutFT : View {
                 }) {
                     HStack {
                         Spacer()
-                        Text("Ajouter cette Fiche Technique")
+                        Text("Valider la Fiche Technique")
                             .font(.headline)
                             .foregroundColor(Color.white)
                         Spacer()
                     }
                 }
                 .padding(.vertical, 10.0)
-                .background(Color.red)
+                .background(Color.green)
                 .cornerRadius(4.0)
                 .padding(.horizontal, 50)
             }
             .padding()
+            .background(.green)
             .onChange(of: ficheTechniqueVM.error){ error in
                 switch error {
                 case .noError:
@@ -280,6 +352,7 @@ struct SheetViewAjoutFT : View {
                                 .cancel()])
             }
         }
+        //.background(Color(red : 232/255, green : 211/255, blue : 185/255))
     }
     
     func handleSuppressionEtape(indexToSupress: IndexSet) {

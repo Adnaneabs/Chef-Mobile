@@ -16,7 +16,8 @@ protocol IngredientObserver {
 }
 
 
-class Ingredient{
+class Ingredient : Identifiable{
+    
     
     var id : String
     var nom : String {

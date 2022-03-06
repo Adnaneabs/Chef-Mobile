@@ -10,7 +10,7 @@ import SwiftUI
 struct Home: View {
     var body: some View {
         NavigationView{
-            ListFicheTechniqueView(vm : ListFicheTechniqueViewModel())
+            ListFicheTechniqueView(vm : ListFicheTechniqueViewModel(), vmI: ListIngredientViewModel())
                 .navigationTitle("Fiches Techniques")
                 .navigationViewStyle(.stack)
         }

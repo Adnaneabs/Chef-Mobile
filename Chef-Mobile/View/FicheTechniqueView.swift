@@ -81,10 +81,14 @@ struct FicheTechniqueView: View {
                     ForEach(vm.tabEtape, id: \.id){
                         etape in
                         VStack(alignment: .leading){
-                            Text(etape.titre)
-                            Text(etape.description)
-                            Text("\(etape.duree)")
-                            Text(etape.printTabIngredients())
+                     
+
+                                Text(etape.titre)
+                                Text(etape.description)
+                                Text("\(etape.duree) min")
+                                Text(etape.printTabIngredients())
+                            }
+
                         }
                     }
 //                    .onDelete {
