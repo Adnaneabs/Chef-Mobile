@@ -123,7 +123,8 @@ struct FicheTechniqueView: View {
                 .cornerRadius(4.0)
                 .padding(.horizontal, 50)
             }
-        }
+    
+        
         .navigationTitle("\(vm.nomFiche)")
         .onChange(of: vm.error){ error in
             switch error {
@@ -157,6 +158,7 @@ struct FicheTechniqueView: View {
         }
     }
 }
+
 struct FicheTechniqueView_Previews: PreviewProvider {
     static var previews: some View {
         //FicheTechniqueView(vm: FTViewModel(ficheTechnique: FicheTechnique(id: "1", nomFiche: "Première Fiche", nomAuteur: "Adnane", nbCouvert: 9, tabEtape: [])) )

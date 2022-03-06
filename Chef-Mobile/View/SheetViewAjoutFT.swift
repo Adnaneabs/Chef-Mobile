@@ -122,7 +122,6 @@ struct SheetViewAjoutFT : View {
 
             
             VStack(alignment:.leading){
-                //Text("Veuillez commencer par saisir les etapes de votre fihe technique")
                 Text("Les étapes")
                     .font(.title)
                     .bold()
@@ -261,7 +260,6 @@ struct SheetViewAjoutFT : View {
                 }
                 .padding()
             
-                
             }
             //.background(Color(red : 232/255, green : 211/255, blue : 185/255))
             //.background(.brown)
@@ -354,6 +352,8 @@ struct SheetViewAjoutFT : View {
         }
         //.background(Color(red : 232/255, green : 211/255, blue : 185/255))
     }
+        }}
+        
     
     func handleSuppressionEtape(indexToSupress: IndexSet) {
         indexToSupress.map{
