@@ -22,11 +22,11 @@ struct FicheTechniqueView: View {
     @State var showingAlertChamp : Bool = false
     
     let formatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .decimal
-    return formatter
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
     }()
-
+    
     init(vm: FTViewModel, listVm: ListFicheTechniqueViewModel){
         self.vm = vm
         self.listVm = listVm
@@ -49,30 +49,30 @@ struct FicheTechniqueView: View {
                     .cornerRadius(5.0)
             }
             .padding()
-        VStack(alignment: .leading){
-            Text("Nom de l'auteur : ")
-                .font(.headline)
-            TextField("nomAuteur", text:$vm.nomAuteur)
-                .onSubmit {
-                    intent.intentToChange(nomAuteur: vm.nomAuteur)
-                }
-                .padding(.all)
-                .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-                .cornerRadius(5.0)
-        }
-        .padding()
-        VStack(alignment: .leading){
-            Text("Nombre de couverts : ")
-                .font(.headline)
-            TextField("Quantité", value:$vm.nbCouvert, formatter: formatter)
-                .onSubmit {
-                    intent.intentToChange(nbCouvert: vm.nbCouvert)
-                }
-                .padding(.all)
-                .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-                .cornerRadius(5.0)
-        }
-        .padding()
+            VStack(alignment: .leading){
+                Text("Nom de l'auteur : ")
+                    .font(.headline)
+                TextField("nomAuteur", text:$vm.nomAuteur)
+                    .onSubmit {
+                        intent.intentToChange(nomAuteur: vm.nomAuteur)
+                    }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
+            }
+            .padding()
+            VStack(alignment: .leading){
+                Text("Nombre de couverts : ")
+                    .font(.headline)
+                TextField("Quantité", value:$vm.nbCouvert, formatter: formatter)
+                    .onSubmit {
+                        intent.intentToChange(nbCouvert: vm.nbCouvert)
+                    }
+                    .padding(.all)
+                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                    .cornerRadius(5.0)
+            }
+            .padding()
             
             VStack(alignment: .leading){
                 Text("étapes nécessaires :")
@@ -81,13 +81,17 @@ struct FicheTechniqueView: View {
                     ForEach(vm.tabEtape, id: \.id){
                         etape in
                         VStack(alignment: .leading){
-                                Text(etape.titre)
-                                Text(etape.description)
-                                Text("\(etape.duree)")
-                                Text(etape.printTabIngredients())
-                            }
+                            Text(etape.titre)
+                            Text(etape.description)
+                            Text("\(etape.duree)")
+                            Text(etape.printTabIngredients())
                         }
                     }
+//                    .onDelete {
+//                        (indexSet) in
+//                        intent.intentToChange(indexSetEtape: indexSet)
+//                    }
+                }
                 
                 
             }
@@ -105,8 +109,8 @@ struct FicheTechniqueView: View {
                     HStack {
                         Spacer()
                         Text("Modifier la fiche technique")
-                        .font(.headline)
-                        .foregroundColor(Color.white)
+                            .font(.headline)
+                            .foregroundColor(Color.white)
                         Spacer()
                     }
                 }
