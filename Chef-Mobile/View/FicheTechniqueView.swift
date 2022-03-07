@@ -20,6 +20,7 @@ struct FicheTechniqueView: View {
     
     @State var errorMessageChamp = ""
     @State var showingAlertChamp : Bool = false
+    var dureeT : Int = 0
     
     let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -33,6 +34,14 @@ struct FicheTechniqueView: View {
         self.intent = IntentFicheTechnique()
         self.intent.addObserver(viewModel: listVm)
         self.intent.addObserver(viewModel: vm)
+        
+        //ForEach(vm.tabEtape, id: \.id)
+        var tot : Int = 0
+        for i in 0..<vm.tabEtape.count{
+            tot = tot + vm.tabEtape[i].duree
+            print("\(vm.tabEtape[i].duree) min")
+            }
+        self.dureeT = tot
     }
     
     var body: some View {
@@ -74,7 +83,14 @@ struct FicheTechniqueView: View {
                         .cornerRadius(5.0)
                 }
                 //.padding()
-                
+                VStack(alignment: .leading){
+                    Text("Durée totale : ")
+                        .font(.headline)
+                    Text("\(self.dureeT) min")
+                        .padding(.all)
+                        .background(.gray)
+                        .cornerRadius(5.0)
+                }
                 VStack(alignment: .leading){
                     Text("Etapes nécessaires : ")
                         .font(.headline)

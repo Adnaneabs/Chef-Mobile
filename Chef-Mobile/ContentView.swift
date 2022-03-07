@@ -16,18 +16,29 @@ struct ContentView: View {
                 NavigationLink(destination : ConnexionView()){
                     Text("Connexion")
                 }
+                .background(.white)
                 .padding()
+                
                 .buttonStyle(.bordered)
-                NavigationLink(destination : ContentView()){
+                /*NavigationLink(destination : ContentView()){
                     Text("Fiches Techniques")
                 }
+                .background(.white)
                 .padding()
-                .buttonStyle(.bordered)
+                
+                .buttonStyle(.bordered)*/
             }
             .padding(.bottom,100)
             .navigationViewStyle(.stack)
+            .background(
+                    Image("Background")
+                        .resizable()
+                        .edgesIgnoringSafeArea(.all)
+                        .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+                )
             
         }
+        
         //        .padding()
         .onAppear(perform: {
             viewModel.signedIn = viewModel.isSignedIn
