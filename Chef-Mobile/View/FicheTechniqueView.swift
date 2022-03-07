@@ -36,94 +36,115 @@ struct FicheTechniqueView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading){
+        ScrollView{
             VStack(alignment: .leading){
-                Text("Nom de la fiche : ")
-                    .font(.headline)
-                TextField("Nom", text:$vm.nomFiche)
-                    .onSubmit {
-                        intent.intentToChange(nomFiche: vm.nomFiche)
-                    }
-                    .padding(.all)
-                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-                    .cornerRadius(5.0)
-            }
-            .padding()
-            VStack(alignment: .leading){
-                Text("Nom de l'auteur : ")
-                    .font(.headline)
-                TextField("nomAuteur", text:$vm.nomAuteur)
-                    .onSubmit {
-                        intent.intentToChange(nomAuteur: vm.nomAuteur)
-                    }
-                    .padding(.all)
-                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-                    .cornerRadius(5.0)
-            }
-            .padding()
-            VStack(alignment: .leading){
-                Text("Nombre de couverts : ")
-                    .font(.headline)
-                TextField("Quantité", value:$vm.nbCouvert, formatter: formatter)
-                    .onSubmit {
-                        intent.intentToChange(nbCouvert: vm.nbCouvert)
-                    }
-                    .padding(.all)
-                    .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
-                    .cornerRadius(5.0)
-            }
-            .padding()
-            
-            VStack(alignment: .leading){
-                Text("étapes nécessaires :")
-                    .font(.headline)
-                List{
-                    ForEach(vm.tabEtape, id: \.id){
-                        etape in
-                        VStack(alignment: .leading){
-                     
-
-                                Text(etape.titre)
-                                Text(etape.description)
-                                Text("\(etape.duree) min")
-                                Text(etape.printTabIngredients())
+                VStack(alignment: .leading){
+                    Text("Nom de la fiche : ")
+                        .font(.headline)
+                    TextField("Nom", text:$vm.nomFiche)
+                        .onSubmit {
+                            intent.intentToChange(nomFiche: vm.nomFiche)
+                        }
+                        .padding(.all)
+                        .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                        .cornerRadius(5.0)
+                }
+                //.padding()
+                VStack(alignment: .leading){
+                    Text("Nom de l'auteur : ")
+                        .font(.headline)
+                    TextField("nomAuteur", text:$vm.nomAuteur)
+                        .onSubmit {
+                            intent.intentToChange(nomAuteur: vm.nomAuteur)
+                        }
+                        .padding(.all)
+                        .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                        .cornerRadius(5.0)
+                }
+                //.padding()
+                VStack(alignment: .leading){
+                    Text("Nombre de couverts : ")
+                        .font(.headline)
+                    TextField("Quantité", value:$vm.nbCouvert, formatter: formatter)
+                        .onSubmit {
+                            intent.intentToChange(nbCouvert: vm.nbCouvert)
+                        }
+                        .padding(.all)
+                        .background(Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0))
+                        .cornerRadius(5.0)
+                }
+                //.padding()
+                
+                VStack(alignment: .leading){
+                    Text("Etapes nécessaires : ")
+                        .font(.headline)
+                        //.padding(.all)
+                    //List{
+                    //VStack{
+                        ForEach(vm.tabEtape, id: \.id){
+                            etape in
+                            VStack(alignment: .leading){
+                                    Text("Etape : \(etape.titre)\n")
+                                        .bold()
+                                    Text("▪️ Durée : \n")
+                                        .italic()
+                                        .underline()
+                                    Text("\(etape.duree) min\n")
+                                    Text("▪️ Description\n")
+                                        .underline()
+                                    Text("\(etape.description)\n")
+                                    
+                                    Text("▪️ Ingrédients : \n")
+                                    .underline()
+                                    Text(etape.printTabIngredients())
+                                }
+                            .padding()
                             }
-
+                        .padding(10.0)
+                        .background(Color(red: 220/255, green: 220/255, blue: 220/255, opacity: 1))
+                        .cornerRadius(5.0)
+                        
+                    //}
+                    
+                    
+                        //}
+    //                    .onDelete {
+    //                        (indexSet) in
+    //                        intent.intentToChange(indexSetEtape: indexSet)
+    //                    }
+                    }
+                //.padding()
+                HStack{
+                    Button(action:{
+                        if(vm.isPossibleToSendFT()){
+                            intent.intentToChange(idFicheTechnique: vm.id)
+                            dismiss()
+                        } else {
+                            self.showingAlertBouttonModif = true
+                        }
+                    }) {
+                        HStack {
+                            Spacer()
+                            Text("Modifier la fiche technique")
+                                .font(.headline)
+                                .foregroundColor(Color.white)
+                            Spacer()
                         }
                     }
-//                    .onDelete {
-//                        (indexSet) in
-//                        intent.intentToChange(indexSetEtape: indexSet)
-//                    }
+                    .padding(.vertical, 10.0)
+                    .background(Color.red)
+                    .cornerRadius(4.0)
+                    .padding(.horizontal, 50)
                 }
+
+        }
+        
                 
                 
             }
             .padding()
             
-            HStack{
-                Button(action:{
-                    if(vm.isPossibleToSendFT()){
-                        intent.intentToChange(idFicheTechnique: vm.id)
-                        dismiss()
-                    } else {
-                        self.showingAlertBouttonModif = true
-                    }
-                }) {
-                    HStack {
-                        Spacer()
-                        Text("Modifier la fiche technique")
-                            .font(.headline)
-                            .foregroundColor(Color.white)
-                        Spacer()
-                    }
-                }
-                .padding(.vertical, 10.0)
-                .background(Color.red)
-                .cornerRadius(4.0)
-                .padding(.horizontal, 50)
-            }
-    
+                
         
         .navigationTitle("\(vm.nomFiche)")
         .onChange(of: vm.error){ error in

@@ -65,7 +65,8 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
                                  titre: doc["titre"] as? String ?? "",
                                  description: doc["description"] as? String ?? "",
                                  duree: doc["duree"] as? Int ?? 0,
-                                 tabIngredients: doc["tabIngredients"] as? [String] ?? []
+                                 tabIngredients: doc["tabIngredients"] as? [String] ?? [],
+                                 tabQuantites: doc["tabQuantites"] as? [Int] ?? []
                     )
                     
                 }
@@ -100,6 +101,10 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
     }
     
     func ajoutFicheTechnique(FT: FicheTechnique){
+        //Ajout des étapes également à ce moment
+        for i in 0..<FT.tabEtape.count {
+            self.ajoutEtape(etape: FT.tabEtape[i])
+        }
         firestore.collection("fiche technique").addDocument(data: ["nomFiche" : FT.nomFiche , "nomAuteur" : FT.nomAuteur ,
                                                                    "nbCouvert" : FT.nbCouvert, "tabEtape" : FT.tabReferenceEtape]) {
             error in
@@ -108,10 +113,7 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
             }
         }
         
-        //Ajout des étapes également à ce moment
-        for i in 0..<FT.tabEtape.count {
-            self.ajoutEtape(etape: FT.tabEtape[i])
-        }
+        
     }
     
     func updateFicheTechnique(id: String){
@@ -126,10 +128,9 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
         }
         
         newFT = self.model[i]
-        
         firestore.collection("Fiche technique").document(id).setData(
             ["NomPlat" : newFT.nomFiche, "NomAuteur" : newFT.nomAuteur, "NbCouvert" : newFT.nbCouvert
-             , "Etape" : newFT.tabEtape as Any], merge:true) {
+             /*, "Etape" : newFT.tabEtape*/ ], merge:true) {
                  error in
                  if let error = error {
                      print(error.localizedDescription)
@@ -163,7 +164,7 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
     
     func ajoutEtape(etape : Etape){
         firestore.collection("etape").addDocument(data: ["id": etape.id , "titre" : etape.titre , "description" : etape.description ,
-                                                         "duree" : etape.duree , "tabIngredients" : etape.tabIngredients]) {
+                                                         "duree" : etape.duree , "tabIngredients" : etape.tabIngredients, "tabQuantites" : etape.tabQuantites]) {
             error in
             if let error = error {
                 print(error.localizedDescription)
@@ -176,7 +177,7 @@ class ListFicheTechniqueViewModel : ObservableObject, Subscriber {
             tabEtape[$0]
         }.forEach {
             etape in let etapeId = etape.id
-            let docs = firestore.collection("etape").whereField("id", isEqualTo: "\(etapeId)").getDocuments {
+            let _: Void = firestore.collection("etape").whereField("id", isEqualTo: "\(etapeId)").getDocuments {
                 (snapshot, err) in
                 if let err = err {
                         print("Error getting documents: \(err)")

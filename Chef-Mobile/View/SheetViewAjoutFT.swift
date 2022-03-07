@@ -16,9 +16,10 @@ struct SheetViewAjoutFT : View {
     
     @State var selectedEtape = "test"
     
-    @State var etape : Etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [])
-    @State var nomIngredient : String = ""
+    @State var etape : Etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [], tabQuantites: [])
     
+    @State var nomIngredient : String = ""
+    @State var quantiteIng : Int = 0
     @State var tabEtape : [Etape] = []
     
     @State var tabReferenceEtape : [String] = []
@@ -32,6 +33,8 @@ struct SheetViewAjoutFT : View {
     @State var errorMessageChamp = ""
     @State var showingAlertChamp : Bool = false
     
+    @State var sheetEtapeExistante : Bool = false
+    
     @ObservedObject var ficheTechniqueVM : FTViewModel = FTViewModel(ficheTechnique: FicheTechnique(id: "", nomFiche: "", nomAuteur: "", nbCouvert: 0, tabReferenceEtape: [] ,tabEtape: []))
     
     @ObservedObject var listFicheTechniqueVM : ListFicheTechniqueViewModel
@@ -43,6 +46,12 @@ struct SheetViewAjoutFT : View {
     
     var intentFicheTechnique: IntentFicheTechnique
     
+    var steps : [Etape] = []
+    @StateObject var step : Etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [], tabQuantites: [])
+    @State var selection : Etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [], tabQuantites: [])
+    
+    
+    
     init(vm: ListFicheTechniqueViewModel, vmI : ListIngredientViewModel){
         self.listFicheTechniqueVM = vm
         self.listIngredientVM = vmI
@@ -51,7 +60,7 @@ struct SheetViewAjoutFT : View {
         self.intentFicheTechnique.addObserver(viewModel: listFicheTechniqueVM)
         self.intentFicheTechnique.addObserver(viewModel: ficheTechniqueVM)
         self.intentIngredient.addObserver(viewModel: vmI)
-        
+        self.steps = self.listFicheTechniqueVM.tabEtape
     }
     
     let formatter: NumberFormatter = {
@@ -59,6 +68,8 @@ struct SheetViewAjoutFT : View {
         formatter.numberStyle = .decimal
         return formatter
     }()
+    
+    
     
     @State private var searchString = ""
     
@@ -127,8 +138,65 @@ struct SheetViewAjoutFT : View {
                     .bold()
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.all)
-                
+                ///
+                Text("Ajouter un etape existante : ")
+                    .font(.headline)
+                    .foregroundColor(.green)
+                    .padding()
+                HStack{
+                    Picker( "Etapes", selection: $selection){
+                        ForEach(steps, id : \.self){
+                            Text($0.titre)
+                        }
+                    }
+                    .padding()
+                    .background(Color(red : 220/255, green : 220/255, blue : 220/255))
+                    .foregroundColor(.white)
+                    .cornerRadius(5.0)
+                    .pickerStyle(.menu)
+                    Button(action: {
+                        print("nom de l'ing \(selection.titre)")
+                        self.tabEtape.append(selection)
+                        self.tabReferenceEtape.append(selection.id)
+                    }){
+                        Label("Ajouter", systemImage: "plus")
+                    }
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(.gray)
+                    .cornerRadius(5.0)
+                    TextField("step", text: $step.titre)
+                }
+                .padding()
+                ///
                 VStack(alignment: .leading){
+                    Text("étapes à ajouter :")
+                        .font(.headline)
+                    ScrollView{
+                        List{
+                            ForEach(self.tabEtape, id: \.id){
+                                etape in
+                                VStack(alignment: .leading){
+                                    Text(etape.titre)
+                                }
+                            }
+                            .onDelete{
+                                (indexSet) in
+                                self.indexToSupress = indexSet
+                                self.presentActionSheetDeleteEtape.toggle()
+                            }
+                        }
+                        .frame(minHeight: minRowHeight * 3).border(Color.red)
+
+                    }
+                    
+                }
+                .padding()
+                VStack(alignment: .leading){
+                    Text("Créer une nouvelle étape")
+                        .font(.headline)
+                        .foregroundColor(.green)
+                        .padding(.bottom)
                     Text("Titre de l'étape : ")
                         .font(.headline)
                     TextField("titre", text: $etape.titre)
@@ -172,18 +240,28 @@ struct SheetViewAjoutFT : View {
                         Button(action: {
                             print("nom de l'ing \(nomIngredient)")
                             self.etape.tabIngredients.append(nomIngredient)
+                            self.etape.tabQuantites.append(quantiteIng)
                             self.nomIngredient = ""
                             print(self.etape.tabIngredients)
                         }){
-                            Label("Ajouter l'ingrédient", systemImage: "plus")
+                            Label("Ajouter", systemImage: "plus")
                         }
                         .padding()
                         .foregroundColor(.white)
                         .background(.gray)
                         .cornerRadius(5.0)
+                        TextField("Ingrédient", text: $nomIngredient)
                     }
                     
-                    TextField("ingrédient", text: $nomIngredient)
+                    
+                    /*.onSubmit {
+                     print("nom de l'ing \(nomIngredient)")
+                     self.etape.tabIngredients.append(nomIngredient)
+                     self.nomIngredient = ""
+                     print(self.etape.tabIngredients)
+                     }*/
+                    Text("Quantité : ")
+                    TextField("Quantité", value: $quantiteIng, formatter: formatter)
                     /*.onSubmit {
                      print("nom de l'ing \(nomIngredient)")
                      self.etape.tabIngredients.append(nomIngredient)
@@ -199,19 +277,30 @@ struct SheetViewAjoutFT : View {
                         Text("Ingrédients de l'étape :")
                             .font(.headline)
                         ScrollView{
-                            List{
-                                ForEach(self.etape.tabIngredients, id :\.self){
-                                    nom in
-                                    VStack(alignment: .leading){
-                                        Text("nom de l'ingrédient : \(nom)")
+                            HStack{
+                                List{
+                                    ForEach(self.etape.tabIngredients, id :\.self){
+                                        nom in
+                                        VStack(alignment: .leading){
+                                            Text("nom de l'ingrédient : \(nom)")
+                                        }
+                                    }
+                                    .onDelete{
+                                        (indexSet) in
+                                        self.etape.tabIngredients.remove(atOffsets: indexSet)
+                                        self.etape.tabQuantites.remove(atOffsets: indexSet)
                                     }
                                 }
-                                .onDelete{
-                                    (indexSet) in
-                                    self.etape.tabIngredients.remove(atOffsets: indexSet)
+                                List{
+                                    ForEach(self.etape.tabQuantites, id :\.self){
+                                        q in
+                                        VStack(alignment: .leading){
+                                            Text("Quantité de l'ingrédient : \(q) ")
+                                        }
+                                    }
                                 }
+                                .frame(minHeight: minRowHeight * 3).border(Color.red)
                             }
-                            .frame(minHeight: minRowHeight * 3).border(Color.red)
                         }
                         
                     }
@@ -222,7 +311,7 @@ struct SheetViewAjoutFT : View {
                             self.etape.id = UUID().uuidString
                             self.tabEtape.append(self.etape)
                             self.tabReferenceEtape.append(self.etape.id)
-                            self.etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [])
+                            self.etape = Etape(id: "", titre: "", description: "", duree: 0, tabIngredients: [], tabQuantites: [])
                         }) {
                             HStack {
                                 Spacer()
@@ -235,31 +324,9 @@ struct SheetViewAjoutFT : View {
                     }
                         .padding()
                 
-                        VStack(alignment: .leading){
-                            Text("étapes à ajoutées :")
-                                .font(.headline)
-                            ScrollView{
-                                List{
-                                    ForEach(self.tabEtape, id: \.id){
-                                        etape in
-                                        VStack(alignment: .leading){
-                                            Text(etape.titre)
-                                        }
-                                    }
-                                    .onDelete{
-                                        (indexSet) in
-                                        self.indexToSupress = indexSet
-                                        self.presentActionSheetDeleteEtape.toggle()
-                                    }
-                                }
-                                .frame(minHeight: minRowHeight * 3).border(Color.red)
-
-                            }
-                            
-                        }
-                        .padding()
+                        
                     }
-                    .padding()
+                    //.padding()
                     
             HStack{
                 Button(action: {
