@@ -9,3 +9,8 @@ Vincent Baret
 depot github : https://github.com/Adnaneabs/Chef-Mobile
 
 il faut : Installer tout les packages Firebase
+
+---- Pour l'utilisation ----
+email : adnane@gmail.com
+mdp : 123456
+----                    ----
